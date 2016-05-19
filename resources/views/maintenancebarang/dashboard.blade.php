@@ -274,7 +274,7 @@
                                             @if ($permohonan->NomorSurat == null)
 
                                             Nomor Surat <br>
-                                            <input type="text" name="nomorsurat" required/><br>
+                                            <input type="text" name="nomorsurat" maxlength="100" required/><br>
 
                                             @endif                        
 

@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_buatpinjam', 'active')
+@section('sidebar_buatpinjam', 'active white-text')
 
 @section('konten')
 <div class="subsection">
@@ -35,7 +35,7 @@
     		<div class="row form-row">
                 <div class="col s6">
                     <b>Subjek</b><br>
-                    <input name="subjek" placeholder="Contoh: Permohonan Registrasi Barang BEM" id="subject" type="text" class="validate" value="">
+                    <input name="subjek" maxlength="100" placeholder="Contoh: Permohonan Registrasi Barang BEM" id="subject" type="text" class="validate" value="">
                 </div><br>
 
                 <div class="col s12">

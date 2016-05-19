@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_buatgedung', 'active')
+@section('sidebar_buatgedung', 'active white-text')
 
 @section('konten')
 <div class="subsection">
@@ -15,7 +15,7 @@
 				<div class="input-field">
 					<b>Nama Gedung</b><br>
 					<span class="error red-text">{{ (session()->get('error_gedung') == '') ? $errors->first('namagedung') : session()->get('error_gedung') }}</span><br>
-					<input type="text" name="namagedung" value="{{ old('namagedung') }}" placeholder="contoh: Gedung C, Gedung Seminar">
+					<input type="text" name="namagedung" value="{{ old('namagedung') }}" placeholder="contoh: Gedung C, Gedung Seminar" maxlength="25" required>
 				</div><br>
 
 				<div class="input-field center">

@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_jadwal', 'active')
+@section('sidebar_jadwal', 'active white-text')
 
 @section('fullcalendar')
 <script type="text/javascript" src="{{ url('js/moment.min.js') }}"></script>

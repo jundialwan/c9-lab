@@ -53,7 +53,7 @@
                             </div>
 
                             <b>Subjek</b>
-                            <input required name="subjek" placeholder="Permohonan Registrasi Barang BEM" id="subject" type="text" class="validate" value="{{ old('subjek') }}">
+                            <input required name="subjek" maxlength="100" placeholder="Permohonan Registrasi Barang BEM" id="subject" type="text" class="validate" value="{{ old('subjek') }}">
 
                             <b>Catatan Pemohon</b>
                             <textarea name="catatanpemohon" class="materialize-textarea validate" length="240" required>{{ old('catatanpemohon') }}</textarea>
@@ -78,7 +78,7 @@
                                             <div class="col s6 input-field">
                                                 <b>Nama Barang </b>
                                                 <!-- <span class="error red-text">{{ $errors->first('namabarang.'.$i) }}</span><br> -->
-                                                <input required type="text" name="namabarang[{{$i}}]" length="100" value="{{ old('namabarang.'.$i) }}" class="validate">                          
+                                                <input required type="text" name="namabarang[{{$i}}]" maxlength="100" value="{{ old('namabarang.'.$i) }}" class="validate">                          
                                             </div>
 
                                             <div class="col s6 input-field">
@@ -93,7 +93,7 @@
                                             <div class="col s6 input-field">
                                                 <b>Penanggung Jawab</b>
                                                 <!-- <span class="error red-text">{{ $errors->first('penanggungjawab.'.$i) }}</span><br>                  -->
-                                                <input required type="text" name="penanggungjawab[{{$i}}]" length="100" value="{{ old('penanggungjawab.'.$i) }}" class="validate">           
+                                                <input required type="text" name="penanggungjawab[{{$i}}]" maxlength="100" value="{{ old('penanggungjawab.'.$i) }}" class="validate">           
                                             </div> 
 
                                             <div class="col s6 input-field">
@@ -116,7 +116,7 @@
                                             <div class="col s6 input-field">
                                                 <b>Jenis Barang </b>
                                                 <!-- <span class="error red-text">{{ $errors->first('jenisbarang.'.$i) }}</span><br>                  -->
-                                                <input required id="jenisbarang1" type="text" name="jenisbarang[{{$i}}]" value="{{ old('jenisbarang.'.$i) }}" length="100" class="validate">
+                                                <input required type="text" name="jenisbarang[{{$i}}]" value="{{ old('jenisbarang.'.$i) }}" maxlength="100" class="validate">
                                             </div>          
 
                                             <div class="col s6 input-field">

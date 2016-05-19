@@ -219,7 +219,7 @@
                             <b>Setujui/Tolak Permohonan</b><br>
                             @if ($data['allpermohonan'][$i]->NomorSurat == null)
                             Nomor Surat <br>
-                            <input type="text" name="nomorsurat" required/>
+                            <input type="text" name="nomorsurat" maxlength="100" required/>
                             @endif                        
                         </div>
                         <div class="col s12">                                               

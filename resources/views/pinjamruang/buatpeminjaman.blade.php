@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_buatpinjam', 'active')
+@section('sidebar_buatpinjam', 'active white-text')
 
 @section('konten')	
 <div class="subsection">
@@ -15,19 +15,19 @@
 						Pilih Jenis Ruangan :
 			 		</p>
 					<p>
-						<input name="jenisRuangan" type="radio" id="Kelas" value="Kelas"/>
+						<input required name="jenisRuangan" type="radio" id="Kelas" value="Kelas"/>
 					    <label for="Kelas">Ruang Kelas</label>				 	
 					</p>
 					<p>
-					    <input name="jenisRuangan" type="radio" id="Auditorium" value="Auditorium"/>
+					    <input required name="jenisRuangan" type="radio" id="Auditorium" value="Auditorium"/>
 					    <label for="Auditorium">Ruang Auditorium</label>
 					</p>
 					<p>
-					    <input name="jenisRuangan" type="radio" id="RuangRapatBesar" value="RuangRapatBesar"/>
+					    <input required name="jenisRuangan" type="radio" id="RuangRapatBesar" value="RuangRapatBesar"/>
 					    <label for="RuangRapatBesar">Ruang Rapat Besar</label>
 					</p>
 					<p>
-					    <input name="jenisRuangan" type="radio" id="RuangRapatKecil" value="RuangRapatKecil"/>
+					    <input required name="jenisRuangan" type="radio" id="RuangRapatKecil" value="RuangRapatKecil"/>
 					    <label for="RuangRapatKecil">Ruang Rapat Kecil</label>
 					</p>
 				</div>
@@ -36,7 +36,7 @@
 			<div class="row">
 				<div class="col s6">
 					Pilih Tanggal Peminjaman :
-					<input name="tanggal" type="date" class="pilihtanggalpinjam">
+					<input required name="tanggal" type="date" class="pilihtanggalpinjam">
 				</div>
 			</div>
 
@@ -46,7 +46,7 @@
 				</div>	
 
 				<div class="col s2">
-					<select name="waktumulai" id="waktumulai">
+					<select required name="waktumulai" id="waktumulai">
 						<option value="800">08:00</option>
 						<option value="830">08:30</option>
 						<option value="900">09:00</option>
@@ -76,7 +76,7 @@
 					 <h6 style="text-align: center">s.d.</h6>
 				</div>
 				<div class="col s2">
-					<select name="waktuselesai" id="waktuselesai">
+					<select required name="waktuselesai" id="waktuselesai">
 						<option value="800">08:00</option>
 						<option value="830">08:30</option>
 						<option value="900">09:00</option>
@@ -138,7 +138,7 @@
 				</div>	
 
 				<div class="col s6">
-					<input name="subjek" type="text" id="subjek" class="validate" required>
+					<input name="subjek" type="text" id="subjek" class="validate" maxlength="100" required>
 				</div>
 			</div>	
 			<div class="row">
@@ -156,13 +156,13 @@
 				</div>	
 
 				<div class="col s6">
-					<textarea class="materialize-textarea" name="catatan" id="catatan" cols="30" rows="10"></textarea>					
+					<textarea required class="materialize-textarea" name="catatan" id="catatan" cols="30" rows="10"></textarea>					
 				</div>
 			</div>
 			<div class="row" id="xyz">
 				<div class="col s12">
 					{!! csrf_field() !!}
-					<input type="hidden" name="pemohon" value="{{$data['user_sess']->NomorInduk}}">
+					<input required type="hidden" name="pemohon" value="{{$data['user_sess']->NomorInduk}}">
 					<button class="btn waves-effect waves-light" id="formruangan" name="Next Page">	
 						Simpan Permohonan			    	
 	  				</button>
@@ -209,7 +209,7 @@ $(document).ready(function() {
 					var i = 1;	
 			       		myElementToAppendTo.html('');
 			       	$.each($.parseJSON(data), function(idx, obj) {	
-			           	myElementToAppendTo.append("<li class='collection-item'><div class='row form-row'><div class='col s4 pilihan'><input type='radio' name='ruangandipilih' id='radio"+i+"' value='"+obj.hashRuang+"'/><label for='radio"+i+"'>"+obj.NamaGedung+"</label></div><div class='col s3'>"+obj.NomorRuangan+"</div><div class='col s3'>"+obj.KapasitasRuangan+"</div><div class='col s2'><a class='waves-light waves-effect uncheck' id='"+i+"'><i class='material-icons red-text'>cancel</i></a></div></div></div></li>");
+			           	myElementToAppendTo.append("<li class='collection-item'><div class='row form-row'><div class='col s4 pilihan'><input required type='radio' name='ruangandipilih' id='radio"+i+"' value='"+obj.hashRuang+"'/><label for='radio"+i+"'>"+obj.NamaGedung+"</label></div><div class='col s3'>"+obj.NomorRuangan+"</div><div class='col s3'>"+obj.KapasitasRuangan+"</div><div class='col s2'><a class='waves-light waves-effect uncheck' id='"+i+"'><i class='material-icons red-text'>cancel</i></a></div></div></div></li>");
 			           	i++;
 					});
 				},

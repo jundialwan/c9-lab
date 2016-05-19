@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_buatpinjam', 'active')
+@section('sidebar_buatpinjam', 'active white-text')
 
 @section('konten')
 <div class="subsection">
@@ -40,7 +40,7 @@
                             </div>
 
                             <b>Subjek</b><br>
-                            <input name="subjek" placeholder="Contoh: Permohonan Pengadaan Barang BEM" id="subjek" type="text" value="" class="validate" maxlength="100" required/>
+                            <input name="subjek" maxlength="100" placeholder="Contoh: Permohonan Pengadaan Barang BEM" id="subjek" type="text" value="" class="validate" maxlength="100" required/>
 
                             <b>Catatan Pemohon</b> <br>
                             <textarea name="catatanpemohon" class="materialize-textarea validate" maxlength="240" placeholder="Contoh: Tidak ada" required></textarea>

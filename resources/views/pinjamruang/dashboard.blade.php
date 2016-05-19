@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_dashboard', 'active')
+@section('sidebar_dashboard', 'active white-text')
 
 @section('konten')
 <div class="subsection">
@@ -208,7 +208,7 @@
 
                                     @if ($peminjaman->NomorSurat == null)
                                     <b>Nomor Surat </b><br>
-                                    <input type="text" class="vaidate" name="nomorsurat" maxlength="50" required/>
+                                    <input type="text" class="vaidate" name="nomorsurat" maxlength="100" required/>
                                     @endif
                                                                         
                                     @if ($peminjaman->StatusPermohonan == 0)

@@ -41,7 +41,7 @@
 				    	<div class="col s6 input-field">
 				    		Nama Barang <br>
 				    		<span class="error red-text">{{ $errors->first('namabarang.'.$i) }}</span><br>
-							<input type="text" name="namabarang[{{$i}}]" length="100" value="{{ old('namabarang.'.$i) }}">							
+							<input type="text" name="namabarang[{{$i}}]" maxlength="100" value="{{ old('namabarang.'.$i) }}">							
 				    	</div>
 
 						<div class="col s2 input-field">
@@ -53,7 +53,7 @@
 				    	<div class="col s4 input-field">
 				    		Penanggung Jawab <br> 
 				    		<span class="error red-text">{{ $errors->first('penanggungjawab.'.$i) }}</span><br>   				
-							<input type="text" name="penanggungjawab[{{$i}}]" length="100" value="{{ old('penanggungjawab.'.$i) }}" class="">			
+							<input type="text" name="penanggungjawab[{{$i}}]" maxlength="100" value="{{ old('penanggungjawab.'.$i) }}" class="">			
 				    	</div>    	
 				    </div>   
 
@@ -75,7 +75,7 @@
 				    	<div class="col s4 input-field">
 				    		Jenis Barang <br>
 				    		<span class="error red-text">{{ $errors->first('jenisbarang.'.$i) }}</span><br>    				
-							<input id="jenisbarang1" type="text" name="jenisbarang[{{$i}}]" value="{{ old('jenisbarang.'.$i) }}" length="100" class="">			
+							<input id="jenisbarang1" type="text" name="jenisbarang[{{$i}}]" value="{{ old('jenisbarang.'.$i) }}" maxlength="100" class="">			
 				    	</div>    		
 
 				    	<div class="col s6 input-field">

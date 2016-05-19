@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_gedung', 'active white-text purple')
+@section('sidebar_gedung', 'active white-text')
 
 @section('konten')
 <div class="subsection">

@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_buatbarang', 'active')
+@section('sidebar_buatbarang', 'active white-text')
 
 @section('konten')
 <div class="subsection">
@@ -14,7 +14,7 @@
     				<div class="col s12 input-field">
 			    		Nama Barang <br>
 			    		<span class="error red-text">{{ $errors->first('namabarang') }}</span><br>
-						<input type="text" name="namabarang" length="100" value="{{ (isset($data['barang'])) ? ($data['barang'][0]['NamaBarang']) : old('namabarang') }}">			
+						<input type="text" name="namabarang" maxlength="100" value="{{ (isset($data['barang'])) ? ($data['barang'][0]['NamaBarang']) : old('namabarang') }}">			
 			    	</div>
     			</div>
 
@@ -30,7 +30,7 @@
     				<div class="col s12 input-field">
 			    		Penanggung Jawab <br> 
 			    		<span class="error red-text">{{ $errors->first('penanggungjawab') }}</span><br>   				
-						<input type="text" name="penanggungjawab" length="100" value="{{ (isset($data['barang'])) ? ($data['barang'][0]['Penanggungjawab']) : old('penanggungjawab') }}" class="">			
+						<input type="text" name="penanggungjawab" maxlength="100" value="{{ (isset($data['barang'])) ? ($data['barang'][0]['Penanggungjawab']) : old('penanggungjawab') }}" class="">			
 			    	</div> 
     			</div>
 
@@ -52,7 +52,7 @@
 			    	<div class="col s4 input-field">
 			    		Jenis Barang <br>
 			    		<span class="error red-text">{{ $errors->first('jenisbarang') }}</span><br>    				
-						<input id="jenisbarang1" type="text" name="jenisbarang" value="{{ (isset($data['barang'])) ? ($data['barang'][0]['JenisBarang']) : old('jenisbarang') }}" length="100" class="">			
+						<input id="jenisbarang1" type="text" name="jenisbarang" value="{{ (isset($data['barang'])) ? ($data['barang'][0]['JenisBarang']) : old('jenisbarang') }}" maxlength="100" class="">			
 			    	</div>    		
 
 			    	<div class="col s6 input-field">

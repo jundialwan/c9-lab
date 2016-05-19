@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_buatruangan', 'active')
+@section('sidebar_buatruangan', 'active white-text')
 
 @section('konten')
 <div class="subsection">
@@ -12,14 +12,14 @@
 			<div class="input-field col s6">
 				<b>Nomor Ruangan </b><br>
 				<span class="error red-text">{{ (session()->get('error_ruangan') == '') ? $errors->first('nomorruangan') : session()->get('error_ruangan') }}</span><br>
-				<input placeholder="Harus 4 karakter, contoh: 1102" length="4" id="subject" name="nomorruangan" type="text" class="validate">
+				<input placeholder="Harus 4 karakter, contoh: 1102" maxlength="4" id="subject" name="nomorruangan" type="text" class="validate" required>
 			</div>
 		</div>
 		<div class="row form-row">
 			<div class="input-field col s6">
 				<b>Gedung</b><br>
 				<span class="error red-text">{{ $errors->first('gedungruangan') }}</span><br>
-			    <select id="gedungruangan" name="gedungruangan">
+			    <select id="gedungruangan" name="gedungruangan" required>
 			    	<option disabled selected>Pilih Gedung Ruangan</option>
 					@foreach ($data['allgedung'] as $gedung)				   
 				   	<option value="{{$gedung->hash}}">{{ $gedung->NamaGedung }}</option>   	
@@ -31,7 +31,7 @@
 			<div class="input-field col s3">
 				<b>Jenis Ruangan</b><br>
 				<span class="error red-text">{{ $errors->first('jenisruangan') }}</span><br>
-				<select name="jenisruangan">
+				<select name="jenisruangan" required>
 					<option disabled selected>Pilih Jenis Ruangan</option>
 	                <option value="Kelas">Ruang Kelas</option>
 	                <option value="RuangRapatBesar">Ruang Rapat Besar</option>
@@ -42,7 +42,7 @@
 			<div class="input-field col s3">
 				<b>Kapasitas (orang)</b><br>
 				<span class="error red-text">{{ $errors->first('kapasitasruangan') }}</span><br>
-				<input placeholder="contoh : 50" name="kapasitasruangan" id="subject" type="number" min="1" class="validate">
+				<input placeholder="contoh : 50" name="kapasitasruangan" id="subject" type="number" min="1" class="validate" required>
 			</div>
 		</div>
 		<div class="row form-row">

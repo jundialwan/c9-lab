@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_ruangan', 'active')
+@section('sidebar_ruangan', 'active white-text')
 
 @section('table_head')
 <div id="tableHead" class="row">

@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_buatjadwal', 'active')
+@section('sidebar_buatjadwal', 'active white-text')
 
 @section('konten')	
 <div class="subsection">
@@ -36,7 +36,7 @@
 			<div class="row">
 				<div class="col s6">
 					Pilih Tanggal Peminjaman :
-					<input name="tanggal" type="date" class="pilihtanggalpinjam">
+					<input name="tanggal" type="date" class="pilihtanggalpinjam" required>
 				</div>
 			</div>
 
@@ -46,7 +46,7 @@
 				</div>	
 
 				<div class="col s2">
-					<select name="waktumulai" id="waktumulai">
+					<select name="waktumulai" id="waktumulai" required>
 						<option value="800">08:00</option>
 						<option value="830">08:30</option>
 						<option value="900">09:00</option>
@@ -76,7 +76,7 @@
 					 <h6 style="text-align: center">s.d.</h6>
 				</div>
 				<div class="col s2">
-					<select name="waktuselesai" id="waktuselesai">
+					<select name="waktuselesai" id="waktuselesai" required>
 						<option value="800">08:00</option>
 						<option value="830">08:30</option>
 						<option value="900">09:00</option>
@@ -142,7 +142,7 @@
 			<div class="row" id="xyz">
 				<div class="col s12">
 					{!! csrf_field() !!}
-					<input type="hidden" name="pemohon" value="{{$data['user_sess']->npm}}">
+					<input type="hidden" name="pemohon" value="{{ $data['user_sess']->NomorInduk }}">
 					<button class="btn waves-effect waves-light" id="formruangan" name="Next Page">	
 						SIMPAN JADWAL			    	
 	  				</button>

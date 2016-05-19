@@ -1,6 +1,6 @@
 @extends('sidebar')
 
-@section('sidebar_buatregis', 'active')
+@section('sidebar_buatregis', 'active white-text')
 
 @section('konten')
 <div class="subsection">
@@ -36,7 +36,7 @@
                         <div class="col s6 input-field">
                             Nama Barang <br>
                             <span class="error red-text">{{ $errors->first('namabarang.'.$i) }}</span><br>
-                            <input type="text" name="namabarang[{{$i+1}}]" length="100" value="{{ (isset($data['allkandidat'])) ? ($data['allkandidat'][$i]['NamaBarang']) : old('namabarang.'.$i) }}">       
+                            <input type="text" name="namabarang[{{$i+1}}]" maxlength="100" value="{{ (isset($data['allkandidat'])) ? ($data['allkandidat'][$i]['NamaBarang']) : old('namabarang.'.$i) }}">       
                         </div>
 
                        <div class="col s4 input-field">
@@ -64,7 +64,7 @@
                         <div class="col s4 input-field">
                             Jenis Barang <br>
                             <span class="error red-text">{{ $errors->first('jenisbarang.'.$i) }}</span><br>                 
-                            <input id="jenisbarang1" type="text" name="jenisbarang[{{$i+1}}]" value="{{ (isset($data['allkandidat'])) ? ($data['allkandidat'][$i]['JenisBarang']) : old('jenisbarang.'.$i) }}" length="100" class="">         
+                            <input type="text" name="jenisbarang[{{$i+1}}]" value="{{ (isset($data['allkandidat'])) ? ($data['allkandidat'][$i]['JenisBarang']) : old('jenisbarang.'.$i) }}" maxlength="100" class="">
                         </div> 
 
                      <div class="row form-row">                           
