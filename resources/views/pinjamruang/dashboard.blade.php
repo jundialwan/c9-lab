@@ -183,31 +183,62 @@
                     </div>
                 </div>     
                 
-                <div class="row no-row"> 
-                    @if ($data['user_sess']->Role == 'Staf PPAA' || $data['user_sess']->Role == 'Staf Sekretariat')
-                    
-                    @if ($peminjaman->StatusPermohonan == 0)
-                    <form action="{{ url('pinjamruang/ubah') }}" method="POST">
-                        <div class="col s6">
-                            <b>Setujui/Tolak Permohonan</b><br>
-                            @if ($peminjaman->NomorSurat == null)
-                            Nomor Surat <br>
-                            <input type="text" name="nomorsurat" required/>
-                            @endif                        
-                        </div>
-                        <div class="col s12">                                               
-                            {!! csrf_field() !!}
-                            <input type="hidden" name="hashPermohonan" value="{{ $peminjaman->hashPermohonan }}"><br>
-                            Catatan: <br>
-                            <textarea class="materialize-textarea" class="validate" name="catatan_txtarea" cols="30" rows="30" required>Jika tidak ada catatan tulis "Tidak ada"</textarea>
-                            <input type="submit" value="TOLAK" name="tolak" class="waves-effect waves-red btn red right"/>
-                            <input type="submit" value="SETUJU" name="setuju" class="btn waves-effect waves-light teal white-text right"/>
-                        </div>
-                    </form>
-                    @endif
+                @if ($data['user_sess']->Role == 'Staf PPAA' || $data['user_sess']->Role == 'Staf Sekretariat')
+                
+                <form action="{{ url('pinjamruang/ubah') }}" method="POST">
+                    {!! csrf_field() !!}
+                    <input type="hidden" name="hashPermohonan" value="{{ $peminjaman->hashPermohonan }}">
 
-                    @endif
-                </div>
+                    <div class="row no-row"> 
+                        <div class="col s12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-title">
+                                        Persetujuan
+                                    </div>
+                                    
+                                    <span class="wrap-text grey-text">
+                                        @if ($peminjaman->NomorSurat == null)
+                                        Nomor surat perlu diberikan terlebih dahulu oleh staf sebelum dapat disetujui. <br>
+                                        Berikan catatan yang sesuai dan deskriptif. <br>
+                                        @endif
+
+                                        Persetujuan tidak dapat dibatalkan.
+                                    </span><br><br>
+
+                                    @if ($peminjaman->NomorSurat == null)
+                                    <b>Nomor Surat </b><br>
+                                    <input type="text" class="vaidate" name="nomorsurat" maxlength="50" required/>
+                                    @endif
+                                                                        
+                                    @if ($peminjaman->StatusPermohonan == 0)
+                                    <b>Catatan:</b> <br>
+                                    <textarea class="materialize-textarea validate" name="catatan_txtarea" cols="30" rows="30" placeholder="Jika tidak ada catatan tulis 'Tidak ada'" required></textarea>                                    
+                                    @endif
+
+                                </div>
+
+                                <div class="card-action">
+                                    <div class="row no-row">
+                                        <div class="col s12">
+                                            @if ($peminjaman->StatusPermohonan == 0)
+                                            <input type="submit" value="TOLAK" name="tolak" class="waves-effect waves-red btn red right"/>
+                                            <input type="submit" value="SETUJU" name="setuju" class="btn waves-effect waves-light teal white-text right"/>
+                                            @else
+                                            <a name="tolak" class="waves-effect waves-red btn red right disabled">TOLAK</a>
+                                            <a name="setuju" class="btn waves-effect waves-light teal white-text right disabled">SETUJU</a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </form>                
+
+                @endif
+
+                @if (!($data['user_sess']->Role == 'Staf PPAA') && !($data['user_sess']->Role == 'Staf Sekretariat'))
 
                 <div class="row no-row">
                     <div class="col s12">
@@ -230,7 +261,6 @@
                             <div class="card-action">
                                 <div class="row no-row">                                    
                                     <div class="col s12">
-                                        @if (!($data['user_sess']->Role == 'Staf PPAA') && !($data['user_sess']->Role == 'Staf Sekretariat'))
 
                                         @if($peminjaman->StatusPermohonan == 0)
                                         
@@ -249,13 +279,14 @@
 
                                         @endif
 
-                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                @endif
             </div>         
         </li>        
         @endforeach

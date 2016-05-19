@@ -125,11 +125,19 @@ class MasterController extends Controller
 
     		'HM' =>
                 [
-                    'pinjamruang', 'buatpinjam', 'updatepinjam', 
+                    'pinjamruang', 'buatpinjam', 'updatepinjam', 'jadwal',
                     'registrasibarang', 'buatregistrasi', 'updateregistrasi' ,
                     'maintenancebarang', 'buatmaintenance', 'updatemaintenance',
                     'usulanpengadaan', 'buatpengadaan', 'updatepengadaan'
                 ],
+
+            'Kadept' => [],
+
+            'Kaprog' => [],
+
+            'PAF' => [],
+
+            'Dosen' => [],
 
     		'Mahasiswa' =>
                 [

@@ -7,23 +7,37 @@
 
 	<div class="row">
 		<div class="col s6 push-s3">
-			@if (session()->get('login_error') != '' )
-
-			<span class="red-text">{{ session()->get('login_error') }}</span>
-
-			@endif
-
 			<form action="{{ url('login') }}" method="POST">
-				{!! csrf_field() !!}
-				<input type="text" name="user" placeholder="username" required><br>
-				<input type="password" name="pass" placeholder="password" required><br>
-				<button class="btn waves-light waves-effect right">
-					<i class="material-icons right">send</i>
-					LOGIN
-				</button>
-				<input type="reset" class="btn-flat waves-red waves-effect right">&nbsp;&nbsp;&nbsp;
-			</form>	
-								
+				<div class="card">
+					<div class="card-content">
+						<div class="card-title">
+							Login
+						</div>
+
+						@if (session()->get('login_error') != '' )
+
+						<span class="red-text">{{ session()->get('login_error') }}</span>
+
+						@endif
+						
+						{!! csrf_field() !!}
+						<input type="text" name="user" placeholder="username" required><br>
+						<input type="password" name="pass" placeholder="password" required><br>
+
+					</div>
+
+					<div class="card-action">
+						<div class="row no-row">
+							<div class="col s12">
+								<button class="btn waves-light waves-effect right">
+									<i class="material-icons right">send</i>
+									LOGIN
+								</button>							
+							</div>
+						</div>
+					</div>
+				</div>				
+			</form>									
 		</div>
 	</div>
 </div>

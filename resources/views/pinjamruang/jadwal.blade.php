@@ -88,11 +88,11 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col s6">
+					<div class="col s4">
 						<b>Gedung</b><br>
 						<span id="modalgedung"></span>
 					</div>
-					<div class="col s6">
+					<div class="col s4">
 						<b>Ruangan</b><br>
 						<span id="modalruangan"></span>
 					</div>

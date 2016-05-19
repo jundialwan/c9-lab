@@ -276,7 +276,7 @@ class PeminjamanController extends MasterController
             $permohonan[0]->IdPermohonan, 
             $tahapCatatan,
             $input['catatan_txtarea'],
-            session('user_sess')->npm,
+            $request->session()->get('user_sess')->NomorInduk,
             md5($permohonan[0]->IdPermohonan.$tahapCatatan.$request->session()->get('user_sess')->NomorInduk)
         );
 
