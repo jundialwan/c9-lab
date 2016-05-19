@@ -77,7 +77,7 @@
 @endsection
 
 @section('usulanpengadaan/buat')
-	<a href="{{ url('usulanpengadaan/buat') }}" class="collection-item menu-item grey-text @yield('sidebar_buatusulan')">Buat Permohonan Registrasi Barang</a>
+	<a href="{{ url('usulanpengadaan/buat') }}" class="collection-item menu-item grey-text @yield('sidebar_buatusulan')">Buat Permohonan</a>
 @endsection
 
 @section('sidebar_menu')

@@ -247,10 +247,16 @@ class PengadaanController extends MasterController
 
         $input = $request->all();
 
+
         if(session('user_sess')->Role == 'Staf Fasilitas & Infrastruktur'){
             $validation_array['nomorsurat'] = 'required';
             $updatePermohonanArray['nomorsurat'] = $input['nomorsurat'];
+        } 
+        else if (session('user_sess')->Role == 'Staf Pengadaan')
+        {
+            $validation_array['updatepengadaan'] = 'required';
         }
+
 
         $this->validate($request, $validation_array);
 
@@ -267,14 +273,17 @@ class PengadaanController extends MasterController
             $newStatus = 2;
         else if (array_key_exists('tolak', $input))          
             $newStatus = 1;
+        else if (array_key_exists('update', $input))
+            $newStatus = $input['updatepengadaan'];
 
         // increment new tahap
-        if($lastStatus == 2) 
+        if($lastStatus == 2 && $lastTahap != 4) 
             $newTahap = $lastTahap + 1;  
+        
+        // dd($newTahap.' '.$newStatus);
 
         // update permohonan
         $updatePermohonanArray = [
-            'NomorSurat' => $input['nomorsurat'],
             'StatusPermohonan' => $newStatus,
         ];
 
