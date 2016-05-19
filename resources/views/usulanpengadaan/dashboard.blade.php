@@ -294,7 +294,7 @@
                 ($data['allpermohonan'][$i]->TahapPermohonan == 1 && $data['allpermohonan'][$i] -> StatusPermohonan== 2) ||
                 ($data['allpermohonan'][$i]->TahapPermohonan == 2 && $data['allpermohonan'][$i] -> StatusPermohonan== 2) ||
                 ($data['allpermohonan'][$i]->TahapPermohonan == 3 && $data['allpermohonan'][$i] -> StatusPermohonan== 2) ||
-                ($data['allpermohonan'][$i]->TahapPermohonan == 4 && $data['allpermohonan'][$i] -> StatusPermohonan!= 4) 
+                ($data['allpermohonan'][$i]->TahapPermohonan == 4 && $data['allpermohonan'][$i] -> StatusPermohonan!= 5) 
                 )
 
                 <div class="row no-row">

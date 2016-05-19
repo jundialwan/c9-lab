@@ -247,7 +247,6 @@ class PengadaanController extends MasterController
 
         $input = $request->all();
 
-
         if(session('user_sess')->Role == 'Staf Fasilitas & Infrastruktur'){
             $validation_array['nomorsurat'] = 'required';
             $updatePermohonanArray['nomorsurat'] = $input['nomorsurat'];
@@ -256,7 +255,6 @@ class PengadaanController extends MasterController
         {
             $validation_array['updatepengadaan'] = 'required';
         }
-
 
         $this->validate($request, $validation_array);
 
@@ -278,9 +276,9 @@ class PengadaanController extends MasterController
 
         // increment new tahap
         if($lastStatus == 2 && $lastTahap != 4) 
-            $newTahap = $lastTahap + 1;  
-        
-        // dd($newTahap.' '.$newStatus);
+            $newTahap = $lastTahap + 1;
+        else 
+            $newTahap = $lastTahap;  
 
         // update permohonan
         $updatePermohonanArray = [
