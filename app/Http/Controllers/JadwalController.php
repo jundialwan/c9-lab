@@ -81,7 +81,6 @@ class JadwalController extends MasterController
             // get timestamp
             $waktuMulai = date('Y\-m\-d H:i:s', strtotime($tanggal.$inputmulai));
             $waktuSelesai = date('Y\-m\-d H:i:s', strtotime($tanggal.$inputselesai));
-            dd($tanggal.' | '.$waktuSelesai);
             $ruangan = Ruangan::getRuangan($input['ruangandipilih']);
 
             $IdGedung = $ruangan[0]->IdGed;

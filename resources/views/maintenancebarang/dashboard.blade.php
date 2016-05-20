@@ -255,8 +255,7 @@
                 @if (
                     ($permohonan->TahapPermohonan == 1 && $permohonan -> StatusPermohonan== 0) ||
                     ($permohonan->TahapPermohonan == 1 && $permohonan -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Manajer Fasilitas & Infrastruktur') ||
-                    ($permohonan->TahapPermohonan == 2 && $permohonan -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Wakil Dekan 2') ||
-                    ($permohonan->TahapPermohonan == 3 && $permohonan -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Wakil Dekan 2')
+                    ($permohonan->TahapPermohonan == 2 && $permohonan -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Wakil Dekan 2')                    
                 )
 
                 <div class="row"> 
@@ -322,7 +321,7 @@
                                 <div class="row no-row">
                                     <div class="col s12">
                                         
-                                        @if ($data['user_sess']->Role != 'Manager Fasilitas & Infrastruktur' && $data['user_sess']->Role != 'Staf Fasilitas & Infrastruktur' && $data['user_sess']->Role != 'Wakil Dekan')
+                                        @if ($data['user_sess']->Role != 'Manager Fasilitas & Infrastruktur' && $data['user_sess']->Role != 'Staf Fasilitas & Infrastruktur' && $data['user_sess']->Role != 'Wakil Dekan 2')
                                         
                                         @if($permohonan->StatusPermohonan == 0)
 
