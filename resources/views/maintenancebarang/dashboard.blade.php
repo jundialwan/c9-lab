@@ -250,7 +250,15 @@
                 </div>     
 
              
-                @if ($data['user_sess']->Role == 'Manager Fasilitas & Infrastruktur' || $data['user_sess']->Role == 'Staf Fasilitas & Infrastruktur' || $data['user_sess']->Role == 'Wakil Dekan')
+                @if ($data['user_sess']->Role == 'Manajer Fasilitas & Infrastruktur' || $data['user_sess']->Role == 'Staf Fasilitas & Infrastruktur' || $data['user_sess']->Role == 'Wakil Dekan 2')
+
+                @if (
+                    ($permohonan->TahapPermohonan == 1 && $permohonan -> StatusPermohonan== 0) ||
+                    ($permohonan->TahapPermohonan == 1 && $permohonan -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Manajer Fasilitas & Infrastruktur') ||
+                    ($permohonan->TahapPermohonan == 2 && $permohonan -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Wakil Dekan 2') ||
+                    ($permohonan->TahapPermohonan == 3 && $permohonan -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Wakil Dekan 2')
+                )
+
                 <div class="row"> 
                     <div class="col s12">
                         <div class="card">
@@ -263,34 +271,27 @@
                                         Persetujuan
                                     </div><br>
                                     
-                                    <div class="row">
-                                        <div class="col s12">
-                                            @if (
-                                                ($permohonan->TahapPermohonan == 1 && $permohonan -> StatusPermohonan== 0) ||
-                                                ($permohonan->TahapPermohonan == 1 && $permohonan -> StatusPermohonan== 2) ||
-                                                ($permohonan->TahapPermohonan == 2 && $permohonan -> StatusPermohonan== 2) 
-                                            )
+                                    <span class="grey-text wrap-text">
+                                        Persetujuan tidak dapat dibatalkan. Periksa kembali kelengkapan permohonan.
+                                    </span><br><br>
                                             
-                                            @if ($permohonan->NomorSurat == null)
+                                    @if ($permohonan->NomorSurat == null)
 
-                                            Nomor Surat <br>
-                                            <input type="text" name="nomorsurat" maxlength="100" required/><br>
+                                    <b>Nomor Surat </b><br>
+                                    <input type="text" name="nomorsurat" maxlength="100" class="validate" required/><br>
 
-                                            @endif                        
+                                    @endif                        
 
-                                            Catatan: <br>
-                                            <textarea class="materialize-textarea" class="validate" name="catatan_txtarea" cols="30" rows="30"placeholder="Jika tidak ada catatan tulis 'Tidak ada'" required></textarea>                                    
-
-                                            @endif                                                                            
-                                        </div>
-                                    </div>                                
+                                    <b>Catatan: </b><br>
+                                    <textarea class="materialize-textarea" class="validate" name="catatan_txtarea" cols="30" rows="30"placeholder="Jika tidak ada catatan tulis 'Tidak ada'" required></textarea>
+                                                                       
                                 </div>    
 
                                 <div class="card-action">
                                     <div class="row no-row">
                                         <div class="col s12">
-                                            <button type="submit" value="SETUJU" name="setuju" class="btn waves-effect waves-light teal white-text right" style="margin-left: 12px">SETUJU</button>
-                                            <button type="submit" value="TOLAK" name="tolak" class="waves-effect waves-red btn red right">TOLAK</button>                                            
+                                            <button type="submit" value="TOLAK" name="tolak" class="waves-effect waves-red btn red right" style="margin-left: 12px">TOLAK</button>                                            
+                                            <button type="submit" value="SETUJU" name="setuju" class="btn waves-effect waves-light teal white-text right">SETUJU</button>
                                         </div>
                                     </div>
                                 </div>
@@ -298,6 +299,8 @@
                         </div>
                     </div>
                 </div>
+
+                @endif
 
                 @else
                             
@@ -308,15 +311,11 @@
                                 <div class="card-title">
                                     Informasi
                                 </div>
-
-                                <div class="row no-row ">
-                                    <div class="col s12">
-
-                                        <span class="grey-text wrap-text">
-                                            Anda hanya bisa mengubah atau menghapus permohonan Anda sebelum permohonan ditetapkan statusnya oleh Staf. <br>
-                                        </span>
-                                    </div>                                    
-                                </div>
+                                
+                                <span class="grey-text wrap-text">
+                                    Anda hanya bisa mengubah atau menghapus permohonan Anda sebelum permohonan ditetapkan statusnya oleh Staf. <br>
+                                </span>
+                                 
                             </div>
 
                             <div class="card-action">

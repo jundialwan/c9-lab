@@ -23,15 +23,8 @@ class RegistrasiController extends MasterController
         // check if user permitted        
         if (!($this->isPermitted('registrasibarang'))) return redirect('/');    
     
-		// get permohonan registrasi barang data
-        // check the user role
-        if (session('user_sess')->Role != 'Manager Fasilitas & Infrastruktur' &&
-            session('user_sess')->Role != 'Staf Fasilitas & Infrastruktur') 
-        {
-            $registrasi = Permohonan::getRegistrasi($request->session()->get('user_sess')->NomorInduk);                
-        } else {
-            $registrasi = Permohonan::getRegistrasi();                
-        }
+		// get permohonan registrasi barang data                
+        $registrasi = Permohonan::getRegistrasi($request->session()->get('user_sess')->Role, $request->session()->get('user_sess')->NomorInduk);                
 
 		// render registrasi barang dashboard
 		return $this->render('registbarang.dashboard', [
@@ -263,21 +256,34 @@ class RegistrasiController extends MasterController
         // check if user permitted        
         if (!($this->isPermitted('updateregistrasi'))) return redirect('registrasibarang');
 
-        // validate request
-        $this->validate($request, [
-            'nomorsurat' => 'required',
-            'catatan_txtarea' => 'required',
-        ]);
-
-        $input = $request->all();
         $newStatus = 0;        
         $newTahap = 1;
+
+        $validation_array = [
+            'catatan_txtarea' => 'required',
+        ];
+
+        $updatePermohonanArray = [];
+
+        // validate request
+
+        $input = $request->all();
+
+        if(session('user_sess')->Role == 'Staf Fasilitas & Infrastruktur'){
+            $validation_array['nomorsurat'] = 'required';
+            $updatePermohonanArray['nomorsurat'] = $input['nomorsurat'];
+        }         
+
+        $this->validate($request, $validation_array);
+
         $lastTahap = Master::getLastId('permohonan', 'TahapPermohonan', [
             ['hashPermohonan', '=', $input['hashPermohonan']]
         ]);        
+
         $lastStatus = Master::getLastId('permohonan', 'StatusPermohonan', [
             ['hashPermohonan', '=', $input['hashPermohonan']]
         ]);
+
 
         // check update, TOLAK / SETUJU
         if (array_key_exists('setuju', $input))
@@ -290,24 +296,22 @@ class RegistrasiController extends MasterController
             $newTahap = $lastTahap + 1;        
 
         // update permohonan array
-        $updatePermohonanArray = [
-            'NomorSurat' => $input['nomorsurat'],
-            'StatusPermohonan' => $newStatus,
-        ];
+        $updatePermohonanArray['StatusPermohonan'] = $newStatus;
+
+        // dd($lastTahap.' '.$lastStatus.' | '.$newTahap.' '.$newStatus);
 
         // if tahap change, push TahapPermohonan to updatePermohonanArray
         if ($lastTahap != $newTahap) 
             $updatePermohonanArray['TahapPermohonan'] = $newTahap;
-
+        
         // update permohonan registrasi barang
         Permohonan::updatePermohonan($input['hashPermohonan'], $updatePermohonanArray);
-        
-        $permohonan;
+             
+        // get permohonan object
+        $permohonan = Permohonan::where('hashPermohonan', $input['hashPermohonan'])->first();
 
         // if tahap 2 and status 2, insert kandidat_barang to barang
         if ($newTahap == 2 && $newStatus == 2) {
-            // get permohonan object
-            $permohonan = Permohonan::where('hashPermohonan', $input['hashPermohonan'])->first();
 
             // get all kandidat barang related to permohonan
             $allkandidat = KandidatBarang::where('IdPermohonan', $permohonan->IdPermohonan)->get();
@@ -351,11 +355,11 @@ class RegistrasiController extends MasterController
 
         // create catatan
         Catatan::createCatatan(
-            $permohonan[0]->IdPermohonan, 
+            $permohonan->IdPermohonan, 
             $tahapCatatan,
             $input['catatan_txtarea'],
             $request->session()->get('user_sess')->NomorInduk,
-            md5($permohonan[0]->IdPermohonan.$tahapCatatan.$request->session()->get('user_sess')->NomorInduk)
+            md5($permohonan->IdPermohonan.$tahapCatatan.$request->session()->get('user_sess')->NomorInduk)
         );
 
         // redirect to registrasi barang page

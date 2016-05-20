@@ -93,10 +93,10 @@
 		@yield('pinjamruang')
 		@yield('pinjamruang/buat')
 		@yield('pinjamruang/jadwal')
-		@yield('pinjamruang/jadwal/buat')
 
 		@if ($data['user_sess']->Role == 'Staf PPAA' || $data['user_sess']->Role == 'Staf Sekretariat')
 
+		@yield('pinjamruang/jadwal/buat')
 		@yield('pinjamruang/ruangan')
 		@yield('pinjamruang/ruangan/buat')
 		@yield('pinjamruang/gedung')

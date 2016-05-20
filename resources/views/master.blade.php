@@ -33,8 +33,7 @@
 		<div id="header" class = 'collapsible-header'>
 	  		<nav>	  			
 	    		<div class="nav-wrapper">
-			     		<a  href="{{ url('/') }}"><img id="logo"class="brand-logo "  src="{{ url('images/logo FIA.png') }}" alt="logo FIA"/>
-			     				</a>
+			     		<a  href="{{ url('/') }}"><img id="logo" class="brand-logo"  src="{{ url('images/logo FIA.png') }}" alt="logo FIA"></a>
 
 		     			<a id="title" href="{{ url('/') }}">	
 		     				<h5 id="judultitle"style="color:black;" class="left-align">
@@ -46,7 +45,7 @@
 	     				<ul id="nav-mobile" class="right">
     						<br>
     						<li>
-	     						<span class="black-text">{{ $data['user_sess']->Username.' ('.$data['user_sess']->Role.')' }}</span>&nbsp;&nbsp;&nbsp;
+	     						&nbsp;&nbsp;&nbsp;<span class="black-text">{{ $data['user_sess']->Username.' ('.$data['user_sess']->Role.')' }}</span>&nbsp;&nbsp;&nbsp;
 	     					</li>	     					
 		     				<form class="btn-out right" action="{{ url('logout') }}" method="POST">
        			 				{!! csrf_field() !!}

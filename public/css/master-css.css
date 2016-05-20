@@ -70,7 +70,7 @@ hr.styled {
 
 .pinned {
 	position: fixed !important;
-	width: 160px;
+	width: 15% !important;
 }
 
 /* End of side nav */
@@ -251,7 +251,9 @@ textarea {
 
 
 #logo{
-	width:20%;
+	width:12%;
+	margin-left: 12px;
+	margin-top: 12px;
 /*	margin:20px;*/
 }
 
@@ -269,7 +271,7 @@ textarea {
 #sidebar-content{
 	background-color: white;
 	margin-top:10px;	
-	width: 204px;
+	width: 100%;
 }
 
 #logout-icon{

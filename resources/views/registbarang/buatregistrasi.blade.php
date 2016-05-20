@@ -141,7 +141,7 @@
                                             <div class="col s6 input-field">
                                                 <b>Keterangan Barang </b>
                                                 <!-- <span class="error red-text">{{ $errors->first('keteranganbarang.'.$i) }}</span><br>                     -->
-                                                <textarea name="keteranganbarang[{{$i}}]" class="materialize-textarea" cols="30" rows="10">{{ old('keteranganbarang.'.$i) }}</textarea>
+                                                <textarea name="keteranganbarang[{{$i}}]" class="materialize-textarea validate" cols="30" rows="10" required>{{ old('keteranganbarang.'.$i) }}</textarea>
                                             </div>    
                                         </div>
                                     </div><br><br>

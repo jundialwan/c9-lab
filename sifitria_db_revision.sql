@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2016 at 03:15 PM
+-- Generation Time: May 20, 2016 at 03:38 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -61,7 +61,8 @@ INSERT INTO `barang` (`created_at`, `updated_at`, `IdBarang`, `NamaBarang`, `Jen
 ('2016-04-17 10:58:21', '2016-04-17 10:58:21', 9, 'Nokia Lumia 950XL', 'Smartphone', '5,7" Display\r\nWindows 10 Mobile', '2016-05-01 17:00:00', 'Jundi Ahmad Alwan', 'Elektronik', 'Baru', 'Barang dititipkan ke mba Zahra', '9', '2016-04-17 03:58:21', 'Tidak ada', 'de2d5ba0a1bf56121875081b757ba8bc'),
 ('2016-04-20 09:11:53', '2016-04-20 09:11:53', 10, 'Sofa Panjang', 'asdfasdfasdf', 'dsfasfasf', '2016-05-14 04:51:37', 'Jundi Ahmad Alwan', 'Furnitur', 'Baru', 'sadfasdfa', '10', '2016-04-20 02:11:53', 'Bolong-bolong digigitin kucing', '16e1119625a50949e89299e17d8cc93d'),
 ('2016-04-20 09:11:53', '2016-04-20 09:11:53', 11, 'asdfasdfa', 'asdfasda', 'asdfasdf', '2016-03-31 17:00:00', 'asdfsadfa', 'Furnitur', 'Baru', 'fffffffff', '11', '2016-04-20 02:11:53', 'asdfafd', 'ebf7b09a7d049ae3b56182784a2e7125'),
-('2016-04-20 09:22:13', '2016-04-20 09:22:13', 12, 'Meja', 'Furnitur', 'Meja beli di Gramedia Margonda Depok', '2016-04-11 17:00:00', 'Sekretaris BEM (Mahasiswa 2 - 1300000002)', 'Meja', 'Baru', 'Meja ini digunakan untuk membantu kegiatan kesekretariatan BEM FIA', '12', '2016-04-20 02:22:13', NULL, '733b26e57be78df29914546dae6a6572');
+('2016-04-20 09:22:13', '2016-04-20 09:22:13', 12, 'Meja', 'Furnitur', 'Meja beli di Gramedia Margonda Depok', '2016-04-11 17:00:00', 'Sekretaris BEM (Mahasiswa 2 - 1300000002)', 'Meja', 'Baru', 'Meja ini digunakan untuk membantu kegiatan kesekretariatan BEM FIA', '12', '2016-04-20 02:22:13', NULL, '733b26e57be78df29914546dae6a6572'),
+('2016-05-19 21:31:45', NULL, 13, 'Monitor SAMSUNG', 'Monitor', '14 inch', '2016-05-12 17:00:00', 'Firza Pratama', 'Elektronik', 'Baru', 'Barang merupakan hadiah hasil lomba di bandung minggu lalu', '13', '2016-05-19 21:31:45', NULL, '15060c3816ccc8de3bdf75d1dc8e4984');
 
 -- --------------------------------------------------------
 
@@ -100,15 +101,34 @@ INSERT INTO `catatan` (`IdPermohonan`, `TahapCatatan`, `DeskripsiCatatan`, `Nomo
 (18, 0, 'Barangnya masih ada di ruang Ristek dan belum dibuka dari kardus', '1306464114', '1f2b5816f608094baee4b721644fdcde', '2016-05-02 11:07:28', '2016-05-02 11:07:28'),
 (19, 1, 'Terverifikasi', '1306464114', '3d6a454f157b96b450af4cd65bde7b87', '2016-05-07 13:09:52', '2016-05-07 13:09:52'),
 (20, 0, 'HP dilindas mobil dekan', '1306464114', '16a3c5401ac3944a3a58a531a47b5ea1', '2016-05-07 08:44:28', '2016-05-07 08:44:28'),
+(20, 1, 'Baik, dekan juga sudah mengaku melindas', '1306404632', '60d6a95bc383907c5d1cbd0f6bfec08d', '2016-05-19 22:23:09', NULL),
+(20, 2, 'Oke, saya sudah tanya dekan. Beliau tidak sengaja.', '1306464240', '3b3c7df9330e80c79ba4bce0d064dfbd', '2016-05-19 22:51:48', NULL),
+(20, 3, 'BIaya nya ditanggung Bu dekan. Disetujui.', '1306464114', 'c0865610765d18b62694b97d8c0d5a3c', '2016-05-19 23:37:19', NULL),
 (21, 0, 'Mohon diperbaiki secepatnya karena ingin dipakai dinas', '1306464114', '8ff2100bd980b8579c1c6cb9b8241af3', '2016-05-07 13:11:56', '2016-05-07 13:11:56'),
 (21, 1, 'Ditolak. Barang masih mulus gan', '1306464114', '13256d43e1fd38a1d38e1d596edb30c5', '2016-05-07 13:12:36', '2016-05-07 13:12:36'),
+(22, 1, 'oke bos', '1306404632', '3e5222fb918a4ac9a0d6be47e1d0927c', '2016-05-19 19:52:52', NULL),
 (23, 0, 'Mohon laptopnya dibugkus rapi dan jangan dibuka dahulu', '1306464114', '464a901d2b0a9327d08be9ff413f0bef', '2016-05-07 14:07:24', '2016-05-07 14:07:24'),
 (24, 0, 'Mohon segera diperbaiki. Minggu depan ada rektor datang.', '1306464114', '5afa2b2d43574d331e09c931cf12c6ab', '2016-05-07 15:57:13', '2016-05-07 15:57:13'),
 (25, 0, 'Mohon segera diperbaiki. Minggu depan ada rektor datang.', '1306464114', '7e1e9a8f6505f31423cb7d0c9b4dc442', '2016-05-07 17:30:55', '2016-05-07 17:30:55'),
 (26, 0, 'test doang pak', '1306000001', '3129214cbfa712c5784c57b3703d5393', '2016-05-13 12:28:19', '2016-05-13 12:28:19'),
+(26, 1, 'oke gan', '1306382594', '4cb29c88294d5c7201d8ec384d1a1a0b', '2016-05-19 15:30:15', NULL),
 (27, 0, 'rusak rusak', '1306000001', 'a197e1e121ae491cf6112e53bdd7bd29', '2016-05-14 04:51:37', '2016-05-14 04:51:37'),
 (28, 0, 'rusak rusak', '1306000001', '1bb190cbd0e2feb57cc2d03bd611a8a3', '2016-05-14 06:27:47', '2016-05-14 06:27:47'),
-(29, 0, 'wakwawakwawakwawakwawakwawakwaw', '1306000001', '991e3d048290871316d2f254b9ffe7f8', '2016-05-14 08:34:40', '2016-05-14 08:34:40');
+(29, 0, 'wakwawakwawakwawakwawakwawakwaw', '1306000001', '991e3d048290871316d2f254b9ffe7f8', '2016-05-14 08:34:40', '2016-05-14 08:34:40'),
+(29, 1, 'iyak, selesai gan', '1301010101', 'a79785adc31a0e638a050761d95dff70', '2016-05-19 21:06:09', NULL),
+(30, 0, 'Monitor ada di dalam kardus dekat lemari besi', '1306000001', '72604f6d6a66eb684302eff295abb6dd', '2016-05-18 16:33:01', NULL),
+(30, 1, 'terverifikasi', '1306404632', 'b2e15d3c140051326ab9e48d1b1dda7d', '2016-05-19 21:36:57', NULL),
+(31, 0, 'ngantuk mz', '1306000001', '92bfbea445fd27dac479bb5b09eca455', '2016-05-19 20:00:14', NULL),
+(31, 1, 'mantap gan', '1306404632', '47fb8852bbad31f1479134b1ff4801d4', '2016-05-19 20:02:10', NULL),
+(31, 2, 'semangat gan', '1306464240', '8155c106e7033a2a111b1f3da0a3e630', '2016-05-19 20:11:20', NULL),
+(31, 3, 'ngopi dulu aja gan', '1306464114', '18a65ae85e2827a6149ad8be3b7c8fa3', '2016-05-19 20:21:12', NULL),
+(31, 4, 'sabar ya gan', '1301010101', 'dc1570c0b8235f4c3939556bc9d9cf63', '2016-05-19 20:49:55', NULL),
+(31, 5, 'tunggu gan', '1301010101', '1ffc4acc9457254b346c1509327ebf92', '2016-05-19 21:01:15', NULL),
+(31, 6, 'Dikiiiiiit lagi', '1301010101', 'a5b9eedb25d87e5bcda9ac6bc5c6468b', '2016-05-19 21:05:03', NULL),
+(31, 7, 'kurang satu lagi', '1301010101', 'c0269b2cd61463d39a289fedbfa51f7e', '2016-05-19 21:05:17', NULL),
+(31, 8, 'iyak, selesai', '1301010101', '9c1c871b8220a270428d107bfb9d9d71', '2016-05-19 21:08:12', NULL),
+(32, 0, 'Komputer dan tablet ada di MIC', '1306000001', '7b3fd64a5f48a306d4288b47e53dff02', '2016-05-19 21:47:46', NULL),
+(32, 1, 'oke, barang sudah di cek.', '1306404632', '555b252a6881f9b9b693d01b2834a26e', '2016-05-19 21:51:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -227,7 +247,11 @@ INSERT INTO `kandidat_barang` (`created_at`, `updated_at`, `IdKandidatBarang`, `
 ('2016-04-17 19:34:59', '2016-04-20 09:14:14', 5, 'Sofa Personal', 'Kursi Sofa', 'Furnitur', 'tidak ada', 'Baru', 'Jundi Ahmad Alwan', '2016-04-05 17:00:00', 'sofa untuk 1 orang', 0, 10, 'efe8f853816c42fa2f7f6e014dcee2b6'),
 ('2016-05-02 11:07:28', '2016-05-02 14:23:56', 6, 'TV', 'TV', 'Elektronik', 'Hasil menang lomba', 'Baru', 'Jundi Ahmad Alwan', '2016-05-01 17:00:00', '24 inch', 0, 18, '503c626159f89ce38044a025f7093942'),
 ('2016-05-07 14:07:24', '2016-05-08 06:55:07', 7, 'Asus ROG', 'Laptop', 'Elektronik', 'Jangan dibanting. Handle with care.', 'Baru', 'Jundi Ahmad Alwan', '2016-05-07 14:07:24', 'ROG\r\nSpek dewa', 4, 23, '9ddcf76d89f5208a97d438e7a5c37d79'),
-('2016-05-14 08:34:40', '2016-05-14 08:34:40', 8, 'ASUS A46CB', 'Laptop', 'Elektronik', 'Barang nya masih mulus', NULL, 'Jundi', '2016-05-14 08:34:40', 'Dewa deh pokoknya', 0, 29, 'f39ef35aad648c2261da2a5d8755b652');
+('2016-05-14 08:34:40', '2016-05-14 08:34:40', 8, 'ASUS A46CB', 'Laptop', 'Elektronik', 'Barang nya masih mulus', NULL, 'Jundi', '2016-05-14 08:34:40', 'Dewa deh pokoknya', 0, 29, 'f39ef35aad648c2261da2a5d8755b652'),
+('2016-05-18 16:33:01', NULL, 9, 'Monitor SAMSUNG', 'Monitor', 'Elektronik', 'Barang merupakan hadiah hasil lomba di bandung minggu lalu', 'Baru', 'Firza Pratama', '2016-05-12 17:00:00', '14 inch', 0, 30, '9879d56ae72844b640e3a580359beca5'),
+('2016-05-19 20:00:14', NULL, 10, 'Propensi', 'Mata kuliah', 'Lainnya', 'Insya allah lulus semester ini', NULL, 'Jundi', '0000-00-00 00:00:00', 'Bikin pusing dan ngantuk', 0, 31, 'af565bb9ee7614af409536f2557a8ab0'),
+('2016-05-19 21:47:46', NULL, 11, 'PC', 'Komputer', 'Elektronik', 'Barang masih baru dan sudah diinstall di MIC', 'Baru', 'Pak Amril', '2016-04-30 17:00:00', 'RAM 8GB', 0, 32, '4f6df7a177fed5ad1120f05cb1942066'),
+('2016-05-19 21:47:46', NULL, 12, 'Tablet Acer Iconia', 'Tablet', 'Elektronik', 'barang masiha ada di kardus', 'Baru', 'Amril', '2016-04-30 17:00:00', 'Acer 12 Inch', 0, 32, 'ac32eb57d8239c4805f8d5e7f6e40651');
 
 -- --------------------------------------------------------
 
@@ -319,16 +343,19 @@ INSERT INTO `permohonan` (`IdPermohonan`, `NomorSurat`, `SubjekPermohonan`, `IdP
 (17, NULL, 'Seminar', '1306464114', 1, NULL, 3, 3, 6, NULL, NULL, 1, 0, '2016-04-21 08:22:48', '2016-04-21 08:22:48', 1, '4ac3644f31a766b9a2d61563b2bbf0cc'),
 (18, NULL, 'Permohonan registrasi barang Ristek', '1306464114', 2, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2016-05-02 11:07:28', '2016-05-02 11:07:28', 0, '0a4f5ee23688ee939804fcde92c47b87'),
 (19, 'SIFITRIA/A/4/001', 'Kerusakan HP dinas', '1306464114', 4, 9, NULL, NULL, NULL, NULL, NULL, 1, 2, '2016-05-07 08:44:21', '2016-05-07 08:44:21', 0, '91f7f9ec93180caabe8f42d0276c171c'),
-(20, NULL, 'Kerusakan HP dinas', '1306464114', 4, 8, NULL, NULL, NULL, NULL, NULL, 1, 0, '2016-05-07 08:44:28', '2016-05-07 08:44:28', 0, '30951c317d133908d8d753a0d37b425d'),
+(20, 'SIFITRIA/X/4/001', 'Kerusakan HP dinas', '1306464114', 4, 8, NULL, NULL, NULL, NULL, NULL, 3, 2, '2016-05-07 08:44:28', '2016-05-07 08:44:28', 0, '30951c317d133908d8d753a0d37b425d'),
 (21, 'SIFITRIA/A/4/002', 'Kerusakan HP karena virus', '1306464114', 4, 9, NULL, NULL, NULL, NULL, NULL, 1, 1, '2016-05-07 13:11:56', '2016-05-07 13:11:56', 0, '34ee4aec0671434cd44f01112ee3eb51'),
-(22, NULL, 'Pengadaan barang ristek', '1306464114', 3, NULL, NULL, NULL, NULL, '', NULL, 1, 0, '2016-05-07 14:07:16', '2016-05-07 14:07:16', 0, '85c76bc643ec8504ee1d750a9e10069e'),
+(22, 'SIFITRIA/X/4/001', 'Pengadaan barang ristek', '1306464114', 3, NULL, NULL, NULL, NULL, '', NULL, 1, 2, '2016-05-07 14:07:16', '2016-05-07 14:07:16', 0, '85c76bc643ec8504ee1d750a9e10069e'),
 (23, NULL, 'Pengadaan barang ristek', '1306464114', 3, NULL, NULL, NULL, NULL, '', NULL, 1, 0, '2016-05-07 14:07:24', '2016-05-07 14:07:24', 0, '135c25503bad6e3571dea5f3fb535fa1'),
 (24, NULL, 'Sofa panjang bolong ', '1306464114', 4, 10, NULL, NULL, NULL, NULL, NULL, 1, 0, '2016-05-07 15:57:13', '2016-05-07 15:57:13', 0, '8d9578b8567fd303bf84ac1560aa0ae6'),
 (25, NULL, 'Sofa panjang digigitin bolong bolong dadakan lima ratusan', '1306464114', 4, 10, NULL, NULL, NULL, NULL, NULL, 1, 0, '2016-05-07 17:30:55', '2016-05-07 17:30:55', 0, '5492d7632d532e9be9516a91d167bc8c'),
-(26, NULL, 'Peminjaman ruangan untuk rapat', '1306000001', 1, NULL, 3, 3, 7, NULL, NULL, 1, 0, '2016-05-13 12:28:19', '2016-05-13 12:28:19', 0, '372e60c190928266d07397b729e116c6'),
+(26, 'SIFITRIA/A/4/003', 'Peminjaman ruangan untuk rapat', '1306000001', 1, NULL, 3, 3, 7, NULL, NULL, 1, 2, '2016-05-13 12:28:19', '2016-05-13 12:28:19', 0, '372e60c190928266d07397b729e116c6'),
 (27, NULL, 'Sofa rusak', '1306000001', 4, 10, NULL, NULL, NULL, NULL, NULL, 1, 0, '2016-05-14 04:51:36', '2016-05-14 04:51:36', 1, '8b265787b5196678a872e46f1bb7cc77'),
 (28, NULL, 'Sofa rusak', '1306000001', 4, 10, NULL, NULL, NULL, NULL, NULL, 1, 1, '2016-05-14 06:27:47', '2016-05-14 06:27:47', 0, 'a8141b587b3120cecae6f0d4facbd0c4'),
-(29, NULL, 'Pengadaan laptop ristek', '1306000001', 3, NULL, NULL, NULL, NULL, 'qwe', NULL, 1, 0, '2016-05-14 08:34:40', '2016-05-14 08:34:40', 0, 'c39fd64813243d78eed176957007e5e6');
+(29, 'SIFITRIA/X/4/001', 'Pengadaan laptop ristek', '1306000001', 3, NULL, NULL, NULL, NULL, 'qwe', NULL, 4, 5, '2016-05-14 08:34:40', '2016-05-14 08:34:40', 0, 'c39fd64813243d78eed176957007e5e6'),
+(30, 'SIFITRIA/A/2/001', 'Registrasi monitor Ristek', '1306000001', 2, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, '2016-05-18 16:33:01', NULL, 0, '5235c7ab4bb99530aedd774b3bbfb78d'),
+(31, 'SIFITRIA/D/4/001', 'H-6 jam gan', '1306000001', 3, NULL, NULL, NULL, NULL, 'mantap', NULL, 4, 5, '2016-05-19 20:00:14', NULL, 0, 'be5f9e5119b59c4dbd8206881be4f4d6'),
+(32, 'SIFITRIA/A/2/005', 'Registrasi Elektronik MIC', '1306000001', 2, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, '2016-05-19 21:47:46', NULL, 0, 'af54ba27a4604e85ee85335f21a3160a');
 
 -- --------------------------------------------------------
 
@@ -404,6 +431,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`NomorInduk`, `Nama`, `Username`, `Password`, `Role`, `Email`, `NoHp`, `NomorIndukPengelola`, `remember_token`, `created_at`, `updated_at`) VALUES
+('1301010101', 'Joko Widodo', 'joko.widodo', 'c295184f1c7e344fe206401e0b4b9ca1', 'Staf Pengadaan', '', '', NULL, NULL, '2016-05-19 20:24:13', NULL),
 ('1306000001', 'Mahasiswa 1', 'mahasiswa.1', 'c295184f1c7e344fe206401e0b4b9ca1', 'HM', '', '', NULL, NULL, '2016-04-14 01:33:30', '2016-04-14 01:33:30'),
 ('1306000002', 'Mahasiswa 2', 'mahasiswa.2', 'c295184f1c7e344fe206401e0b4b9ca1', 'Mahasiswa', '', '', NULL, NULL, '2016-04-14 01:33:30', '2016-04-14 01:33:30'),
 ('1306000003', 'Mahasiswa 3', 'mahasiswa.3', 'c295184f1c7e344fe206401e0b4b9ca1', 'Mahasiswa', '', '', NULL, NULL, '2016-04-14 01:33:31', '2016-04-14 01:33:31'),

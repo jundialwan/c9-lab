@@ -291,10 +291,10 @@
 
                 @if (
                 ($data['allpermohonan'][$i]->TahapPermohonan == 1 && $data['allpermohonan'][$i] -> StatusPermohonan== 0) ||
-                ($data['allpermohonan'][$i]->TahapPermohonan == 1 && $data['allpermohonan'][$i] -> StatusPermohonan== 2) ||
-                ($data['allpermohonan'][$i]->TahapPermohonan == 2 && $data['allpermohonan'][$i] -> StatusPermohonan== 2) ||
-                ($data['allpermohonan'][$i]->TahapPermohonan == 3 && $data['allpermohonan'][$i] -> StatusPermohonan== 2) ||
-                ($data['allpermohonan'][$i]->TahapPermohonan == 4 && $data['allpermohonan'][$i] -> StatusPermohonan!= 5) 
+                ($data['allpermohonan'][$i]->TahapPermohonan == 1 && $data['allpermohonan'][$i] -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Manager Fasilitas & Infrastruktur') ||
+                ($data['allpermohonan'][$i]->TahapPermohonan == 2 && $data['allpermohonan'][$i] -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Wakil Dekan 2') ||
+                ($data['allpermohonan'][$i]->TahapPermohonan == 3 && $data['allpermohonan'][$i] -> StatusPermohonan== 2 && $data['user_sess']->Role == 'Staf Pengadaan') ||
+                ($data['allpermohonan'][$i]->TahapPermohonan == 4 && $data['allpermohonan'][$i] -> StatusPermohonan!= 5 && $data['user_sess']->Role == 'Staf Pengadaan') 
                 )
 
                 <div class="row no-row">

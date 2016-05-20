@@ -281,9 +281,7 @@ class PengadaanController extends MasterController
             $newTahap = $lastTahap;  
 
         // update permohonan
-        $updatePermohonanArray = [
-            'StatusPermohonan' => $newStatus,
-        ];
+        $updatePermohonanArray['StatusPermohonan'] = $newStatus;
 
         // if tahap change, push TahapPermohonan to updatePermohonanArray
         if ($lastTahap != $newTahap) 

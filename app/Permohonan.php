@@ -96,7 +96,7 @@ class Permohonan extends Model
      * Get Permohonan registrasi barang, kandidat barang, and catatan record
      * @return Array
      */
-    public static function getRegistrasi($nomorinduk = '')
+    public static function getRegistrasi($role, $nomorinduk = '')
     {
         $query = 
             'SELECT * 
@@ -112,7 +112,7 @@ class Permohonan extends Model
         } 
         else if ($role == 'Manajer Fasilitas & Infrastruktur') 
         {
-            $query .= ' AND ((p.TahapPermohonan=1 AND p.StatusPermohonan=2))' ;  
+            $query .= ' AND ((p.TahapPermohonan=1 AND p.StatusPermohonan=2) OR p.TahapPermohonan=2)' ;  
         }         
         else 
         {
@@ -159,15 +159,15 @@ class Permohonan extends Model
 
         if ($role == 'Staf Fasilitas & Infrastruktur') 
         {        
-            $query .=  ' AND p.TahapPermohonan=1 AND p.StatusPermohonan=0' ;
+            $query .=  ' AND p.TahapPermohonan=1 AND p.StatusPermohonan>=0' ;
         } 
         else if ($role == 'Manajer Fasilitas & Infrastruktur') 
         {
-            $query .= ' AND ((p.TahapPermohonan=1 AND p.StatusPermohonan=2))' ;  
+            $query .= ' AND ((p.TahapPermohonan=1 AND p.StatusPermohonan=2) OR p.TahapPermohonan=2)' ;  
         } 
         else if ($role == 'Wakil Dekan 2')
         {
-            $query .= ' AND ((p.TahapPermohonan=2 AND p.StatusPermohonan=2))';
+            $query .= ' AND ((p.TahapPermohonan=2 AND p.StatusPermohonan=2) OR p.TahapPermohonan=3)';
         } 
         else if($role =='Staf Pengadaan')
         {
@@ -230,10 +230,10 @@ class Permohonan extends Model
             $query .=  ' AND p.TahapPermohonan=1 AND p.StatusPermohonan>=0' ;
         } else if ($role == 'Manajer Fasilitas & Infrastruktur') {
             // staf sekertariat can see all ruangan except Kelas
-            $query .= ' AND ((p.TahapPermohonan=1 AND p.StatusPermohonan=2))' ;  
-        } else if ($role == 'Wakil Dekan'){
+            $query .= ' AND ((p.TahapPermohonan=1 AND p.StatusPermohonan=2) OR p.TahapPermohonan=2)' ;  
+        } else if ($role == 'Wakil Dekan 2'){
             // Staf Pengadaan
-            $query .= ' AND ((p.TahapPermohonan=2 AND p.StatusPermohonan=2))';        
+            $query .= ' AND ((p.TahapPermohonan=2 AND p.StatusPermohonan=2) OR p.TahapPermohonan=3)';        
         } else {
             // if user != manajer peminjaman get only his/her permohonan
             if($nomorinduk != '') $query .= ' AND IdPemohon = "'.$nomorinduk.'"';  

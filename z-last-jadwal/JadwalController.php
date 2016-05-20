@@ -20,7 +20,7 @@ class JadwalController extends MasterController
     public function getJadwal()
     {
         // check if user permitted        
-        if (!($this->isPermitted('jadwal'))) return redirect('/');    
+        // if (!($this->isPermitted('jadwal'))) return redirect('/');    
 
         // get all gedung 
     	$allgedung = Gedung::all();
@@ -35,11 +35,30 @@ class JadwalController extends MasterController
         );
 
         // return jadwal view
-    	return $this->render('pinjamruang.jadwal', [
-			'title' => 'Jadwal Ruangan',
-			'allgedung' => $allgedung,
-			'allruangan' => $allruangan,
-    	]);
+    	return $this->render('pinjamruang.jadwal',
+    		[
+    			'title' => 'Jadwal Ruangan',
+    			'allgedung' => $allgedung,
+    			'allruangan' => $allruangan,
+    		]
+    	);
+    }
+
+    /**
+     * Get create jadwal view
+     * @return buatjadwal view
+     */
+    public function getCreateJadwal()
+    {
+        // check if user permitted        
+        // if (!($this->isPermitted('buatjadwal'))) return redirect('/');    
+
+        // return buatjadwal view
+    	return $this->render('pinjamruang.buatjadwal',
+    		[
+    			'title' => 'Buat Jadwal Ruangan',
+    		]
+    	);
     }
 
     /**
@@ -49,88 +68,73 @@ class JadwalController extends MasterController
      */
     public function createJadwal(Request $request)
     {
-        // check if user permitted        
-        if (!($this->isPermitted('buatjadwal'))) return redirect('pinjamruang/jadwal');
+        // get al input
+        $input = $request->all();        
 
-        if ($request->isMethod('POST')) {
-            
-            // get al input
-            $input = $request->all();        
+        // validate input
+        $this->validate($request, [
+            'ruangandipilih' => 'required',
+            'pemohon' => 'required',
+            'keperluan' => 'required',
+            'waktumulai' => 'required',
+            'waktuselesai' => 'required',
+            'jenisRuangan' => 'required',
+            'tanggal' => 'required'
+        ]);
 
-            // validate input
-            $this->validate($request, [
-                'ruangandipilih' => 'required',
-                'pemohon' => 'required',
-                'keperluan' => 'required',
-                'waktumulai' => 'required',
-                'waktuselesai' => 'required',
-                'jenisRuangan' => 'required',
-                'tanggal' => 'required'
-            ]);
+        $tanggal = $input['tanggal'];
+        $inputmulai = substr_replace($input['waktumulai'], ':', strlen($input['waktumulai'])-2, 0);
+        $inputselesai = substr_replace($input['waktuselesai'], ':', strlen($input['waktuselesai'])-2, 0);
 
-            $tanggal = $input['tanggal'];
-            $inputmulai = substr_replace($input['waktumulai'], ':', strlen($input['waktumulai'])-2, 0);
-            $inputselesai = substr_replace($input['waktuselesai'], ':', strlen($input['waktuselesai'])-2, 0);
+        // normalize date
+        if (strlen($inputmulai) == 4) $inputmulai = '0'.$inputmulai;
+        if (strlen($inputselesai) == 4) $inputselesai = '0'.$inputselesai;
 
-            // normalize date
-            if (strlen($inputmulai) == 4) $inputmulai = '0'.$inputmulai;
-            if (strlen($inputselesai) == 4) $inputselesai = '0'.$inputselesai;
+        // get timestamp
+        $waktuMulai = date('Y\-m\-d  H:i:s', strtotime($tanggal.$inputmulai));
+        $waktuSelesai = date('Y\-m\-d  H:i:s', strtotime($tanggal.$inputselesai));
+        $ruangan = Ruangan::getRuangan($input['ruangandipilih']);
 
-            // get timestamp
-            $waktuMulai = date('Y\-m\-d  H:i:s', strtotime($tanggal.$inputmulai));
-            $waktuSelesai = date('Y\-m\-d  H:i:s', strtotime($tanggal.$inputselesai));
-            $ruangan = Ruangan::getRuangan($input['ruangandipilih']);
+        $IdGedung = $ruangan[0]->IdGed;
+        $IdRuangan = $ruangan[0]->IdRuangan;
+        $user = $input['pemohon'];
 
-            $IdGedung = $ruangan[0]->IdGed;
-            $IdRuangan = $ruangan[0]->IdRuangan;
-            $user = $input['pemohon'];
+        // get jadwal last ID
+        $lastJadwalId = Master::getLastId('jadwal', 'IdJadwal', [
+            ['IdGedung', '=', $IdGedung],
+            ['IdRuangan', '=', $IdRuangan],
+        ]);        
+        $IdJadwal = $lastJadwalId + 1;
 
-            // get jadwal last ID
-            $lastJadwalId = Master::getLastId('jadwal', 'IdJadwal', [
-                ['IdGedung', '=', $IdGedung],
-                ['IdRuangan', '=', $IdRuangan],
-            ]);        
-            $IdJadwal = $lastJadwalId + 1;
+        // get permohonan last ID
+        $lastPermohonanId = Master::getLastId('permohonan', 'IdPermohonan');        
+        $IdPermohonan = $lastPermohonanId + 1;
 
-            // get permohonan last ID
-            $lastPermohonanId = Master::getLastId('permohonan', 'IdPermohonan');        
-            $IdPermohonan = $lastPermohonanId + 1;
+        // Memasukkan data ke database tabel jadwal
+        Jadwal::createJadwal([
+            'IdJadwal' => $IdJadwal,
+            'IdRuangan' => $IdRuangan,
+            'IdGedung' => $IdGedung,
+            'WaktuMulai' => $waktuMulai,
+            'WaktuSelesai' => $waktuSelesai,
+            'KeperluanPeminjaman' => $input['keperluan'],
+            'hashJadwal' => md5($IdGedung.$IdRuangan.$IdJadwal)
+        ]);
 
-            // Memasukkan data ke database tabel jadwal
-            Jadwal::createJadwal([
-                'IdJadwal' => $IdJadwal,
-                'IdRuangan' => $IdRuangan,
-                'IdGedung' => $IdGedung,
-                'WaktuMulai' => $waktuMulai,
-                'WaktuSelesai' => $waktuSelesai,
-                'KeperluanPeminjaman' => $input['keperluan'],
-                'hashJadwal' => md5($IdGedung.$IdRuangan.$IdJadwal)
-            ]);
+        Permohonan::createPermohonan([
+            'IdPermohonan' => $IdPermohonan,             
+            'SubjekPermohonan' => $input['keperluan'], 
+            'JenisPermohonan' => 1, 
+            'StatusPermohonan' => 2,
+            'IdPemohon' => $user,
+            'IdGedung' => $IdGedung,
+            'IdRuangan' => $IdRuangan,
+            'IdJadwal' => $IdJadwal,
+            'hashPermohonan' => md5($IdPermohonan.$input['keperluan']),
+        ]);
 
-            Permohonan::createPermohonan([
-                'IdPermohonan' => $IdPermohonan,             
-                'SubjekPermohonan' => $input['keperluan'], 
-                'JenisPermohonan' => 1, 
-                'StatusPermohonan' => 2,
-                'IdPemohon' => $user,
-                'IdGedung' => $IdGedung,
-                'IdRuangan' => $IdRuangan,
-                'IdJadwal' => $IdJadwal,
-                'hashPermohonan' => md5($IdPermohonan.$input['keperluan']),
-            ]);
-
-            // redirect to permohonan peminjaman ruangan page
-            return redirect('pinjamruang/jadwal');
-
-        } else {
-            
-            // return buatjadwal view
-            return $this->render('pinjamruang.buatjadwal', [
-                'title' => 'Buat Jadwal Ruangan',
-            ]);
-
-        }
-        
+        // redirect to permohonan peminjaman ruangan page
+        return redirect('pinjamruang/jadwal');
     }
     
     /**
@@ -202,9 +206,6 @@ class JadwalController extends MasterController
      */
     public function removeJadwal(Request $request)
     {
-        // check if user permitted        
-        if (!($this->isPermitted('hapusjadwal'))) return redirect('pinjamruang/jadwal');
-
         // soft delete jadwal from database
         Jadwal::removeJadwal($request->input('hashJadwal'));
 

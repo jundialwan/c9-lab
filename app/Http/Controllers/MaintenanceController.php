@@ -206,15 +206,24 @@ class MaintenanceController extends MasterController
         // check if user permitted        
         if (!($this->isPermitted('updatemaintenance'))) return redirect('maintenancebarang');
 
-        // validate request
-        $this->validate($request, [
-            'nomorsurat' => 'required',
-            'catatan_txtarea' => 'required',
-        ]);
-
-        $input = $request->all();
         $newStatus = 0;        
         $newTahap = 1;
+
+        $validation_array = [
+            'catatan_txtarea' => 'required',
+        ];
+
+        $updatePermohonanArray = [];
+
+        // validate request
+        $input = $request->all();
+
+        if(session('user_sess')->Role == 'Staf Fasilitas & Infrastruktur'){
+            $validation_array['nomorsurat'] = 'required';
+            $updatePermohonanArray['nomorsurat'] = $input['nomorsurat'];
+        }
+
+        $this->validate($request, $validation_array);
 
         $lastTahap = Master::getLastId('permohonan', 'TahapPermohonan', [
             ['hashPermohonan', '=', $input['hashPermohonan']]
@@ -235,18 +244,11 @@ class MaintenanceController extends MasterController
             $newTahap = $lastTahap + 1;        
 
         // update permohonan array
-        $updatePermohonanArray = [
-            'NomorSurat' => $input['nomorsurat'],
-            'StatusPermohonan' => $newStatus,
-        ];
+        $updatePermohonanArray['StatusPermohonan'] = $newStatus;
 
         // if tahap change, push TahapPermohonan to updatePermohonanArray
         if ($lastTahap != $newTahap) 
             $updatePermohonanArray['TahapPermohonan'] = $newTahap;
-
-        // if status == 1 (ditolak) || maintenance telah selesai, set IdPermohonan barang to null
-        if ($newStatus == 1 || ($newStatus == 2 && $newTahap == 3))
-            Barang::updateBarang($input['hashBarang'], ['IdPermohonan' => $IdPermohonan]);
         
         // update permohonan registrasi barang
         Permohonan::updatePermohonan($input['hashPermohonan'], $updatePermohonanArray);            

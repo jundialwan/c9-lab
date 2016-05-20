@@ -235,47 +235,55 @@
 
                 <!-- end foreach regiscatatan -->
                 
+                @if ($data['user_sess']->Role == 'Manager Fasilitas & Infrastruktur' || $data['user_sess']->Role == 'Staf Fasilitas & Infrastruktur')
+                
+                @if (
+                    ($data['allregistrasi'][$i]->TahapPermohonan == 1 && $data['allregistrasi'][$i]->StatusPermohonan == 0) ||
+                    ($data['allregistrasi'][$i]->TahapPermohonan == 1 && $data['allregistrasi'][$i]->StatusPermohonan == 2 && $data['user_sess']->Role == 'Manager Fasilitas & Infrastruktur') 
+                )
                 
                 <div class="row no-row">
                     <div class="col s12">
-                        <div class="card">
-                            <div class="crad-content">
-                                <div class="card-title">
-                                    Informasi
+                        <form action="{{ url('registrasibarang/ubahstatus') }}" method="POST">
+                            {!! csrf_field() !!}
+                            <input type="hidden" name="hashPermohonan" value="{{ $data['allregistrasi'][$i]->hashPermohonan }}">
+
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-title">
+                                        Persetujuan
+                                    </div>
+
+                                    <span class="wrap-text grey-text">
+                                        Persetujuan tidak dapat dibatalkan. Periksalah kembali kelengkapan data sebelum memberikan persetujuan.
+                                    </span><br><br>
+                                    
+                                    @if ($data['allregistrasi'][$i]->NomorSurat == null)
+                                    Nomor Surat <br>
+                                    <input type="text" name="nomorsurat" maxlength="100" required/>
+                                    @endif                        
+
+                                    Catatan: <br>
+                                    <textarea class="materialize-textarea" class="validate" name="catatan_txtarea" cols="30" rows="30" placeholder="Jika tidak ada catatan tulis 'Tidak ada'" required></textarea>
+
+                                </div>
+
+                                <div class="card-action">
+                                    <div class="row no-row">
+                                        <div class="col s12">
+                                            <input type="submit" value="TOLAK" name="tolak" class="waves-effect waves-red btn red right"/>
+                                            <input type="submit" value="SETUJU" name="setuju" class="btn waves-effect waves-light teal white-text right"/>                                            
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-action">
-                                
-                            </div>
-                        </div>
-                    </div>
-                    @if ($data['user_sess']->Role == 'Manager Fasilitas & Infrastruktur' || $data['user_sess']->Role == 'Staf Fasilitas & Infrastruktur')
-                    
-                    @if (
-                        ($data['allregistrasi'][$i]->TahapPermohonan == 1 && $data['allregistrasi'][$i]->StatusPermohonan == 0) ||
-                        ($data['allregistrasi'][$i]->TahapPermohonan == 1 && $data['allregistrasi'][$i]->StatusPermohonan == 2 && $data['user_sess']->Role == 'Manager Fasilitas & Infrastruktur') 
-                    )
-                    <form action="{{ url('registrasibarang/ubahstatus') }}" method="POST">
-                        <div class="col s6">
-                            <b>Setujui/Tolak Permohonan</b><br>
-                            @if ($data['allregistrasi'][$i]->NomorSurat == null)
-                            Nomor Surat <br>
-                            <input type="text" name="nomorsurat" maxlength="100" required/>
-                            @endif                        
-                        </div>
-                        <div class="col s12">                                               
-                            {!! csrf_field() !!}
-                            <input type="hidden" name="hashPermohonan" value="{{ $data['allregistrasi'][$i]->hashPermohonan }}"><br>
-                            Catatan: <br>
-                            <textarea class="materialize-textarea" class="validate" name="catatan_txtarea" cols="30" rows="30" required>Jika tidak ada catatan tulis "Tidak ada"</textarea>
-                            <input type="submit" value="TOLAK" name="tolak" class="waves-effect waves-red btn red right"/>
-                            <input type="submit" value="SETUJU" name="setuju" class="btn waves-effect waves-light teal white-text right"/>
-                        </div>
-                    </form>
-                    @endif
-
-                    @endif
+                        </form>
+                    </div>                        
                 </div>
+
+                @endif
+
+                @endif
                 
                 @if ($data['user_sess']->Role != 'Manajer Fasilitas & Infrastruktur' && $data['user_sess']->Role != 'Staf Fasilitas & Infrastruktur')
                 <div class="row">                    
@@ -294,6 +302,8 @@
                             <div class="card-action">
                                 <div class="row no-row">
                                     <div class="col s12">
+                                        @if ($data['allregistrasi'][$i]->StatusPermohonan == 0)
+
                                         <form action="{{ url('registrasibarang/batal') }}" method="POST" class="right">
                                             {!! csrf_field() !!}
                                             <input type="hidden" name="hashPermohonan" value="{{ $data['allregistrasi'][$i]->hashPermohonan }}"/>                            
@@ -304,7 +314,21 @@
                                             <button class="btn waves-effect waves-light red white-text" onclick="return confirm('Anda yakin ingin menghapus permohonan registrasi barang ini?')">
                                                 <i class="material-icons">delete</i>
                                             </button>
-                                        </form>                                         
+                                        </form>
+
+                                        @else
+                                        
+                                        <div class="right">
+                                            <a class="btn waves-effect waves-light teal white-text disabled">
+                                                UBAH
+                                                <i class="material-icons right">edit</i>
+                                            </a>
+                                            <button class="btn waves-effect waves-light red white-text disabled" onclick="return confirm('Anda yakin ingin menghapus permohonan registrasi barang ini?')">
+                                                <i class="material-icons">delete</i>
+                                            </button>
+                                        </div>
+
+                                        @endif
                                     </div>
                                 </div>
                             </div>

@@ -21,11 +21,17 @@ class PeminjamanController extends MasterController
     public function dashboard()
     {
         // check if user permitted        
-        if (!($this->isPermitted('pinjamruang'))) return redirect('/');    
+        // if (!($this->isPermitted('pinjamruang'))) return redirect('/');    
 
 		// get permohonan peminjaman ruangan data
-        // check the user role        
-        $peminjaman = Permohonan::getPeminjaman(session('user_sess')->Role, session('user_sess')->NomorInduk);
+        // check the user Role
+        if (session('user_sess')->Role == 'Staf PPAA' ||
+            session('user_sess')->Role == 'Staf Sekretariat') 
+        {
+            $peminjaman = Permohonan::getPeminjaman(session('user_sess')->Role);
+        } else {
+            $peminjaman = Permohonan::getPeminjaman(session('user_sess')->Role, session('user_sess')->NomorInduk);
+        }
 
 		// render peminjaman ruangan dashboard
     	return $this->render('pinjamruang.dashboard',
@@ -44,7 +50,7 @@ class PeminjamanController extends MasterController
     public function getCreatePeminjaman()
     {
         // check if user permitted        
-        if (!($this->isPermitted('buatpinjam'))) return redirect('pinjamruang');    
+        // if (!($this->isPermitted('buatpinjam'))) return redirect('/');    
 
         return $this->render('pinjamruang.buatpeminjaman',
             [
@@ -61,7 +67,7 @@ class PeminjamanController extends MasterController
     public function createPeminjaman(Request $request)
     {
         // check if user permitted        
-        if (!($this->isPermitted('buatpinjam'))) return redirect('pinjamruang');
+        // if (!($this->isPermitted('buatpinjam'))) return redirect('/');
 
         // get al input
         $input = $request->all();        
@@ -156,7 +162,7 @@ class PeminjamanController extends MasterController
         $qstring = parse_str($_SERVER['QUERY_STRING'], $params);
 
         $jenisRuangan= $params['jenisRuangan'];
-        $tanggal = $params['tanggal'];        
+        $tanggal = $params['tanggal'];
         $inputmulai = substr_replace($params['waktuMulai'], ':', strlen($params['waktuMulai'])-2, 0);
         $inputselesai = substr_replace($params['waktuSelesai'], ':', strlen($params['waktuSelesai'])-2, 0);
 
@@ -167,11 +173,7 @@ class PeminjamanController extends MasterController
         $waktuMulai =strtotime($tanggal.$inputmulai);
         $waktuSelesai = strtotime($tanggal.$inputselesai);
 
-        // get timestamp
-        $waktuMulai = date('Y\-m\-d  H:i:s', strtotime($tanggal.$inputmulai));
-        $waktuSelesai = date('Y\-m\-d  H:i:s', strtotime($tanggal.$inputselesai));
-
-         $allruangan = DB::select(DB::raw(
+        $allruangan = DB::select(DB::raw(
             'SELECT * 
             FROM Ruangan r, Gedung g
             WHERE 
@@ -179,15 +181,18 @@ class PeminjamanController extends MasterController
                 r.IdGed=g.IdGedung AND
                 r.deleted=0'
         ));
+
         
         $ruangantersedia = array();
 
-        foreach($allruangan as $ruangan) {            
-            $IdGedung = $ruangan->IdGedung;
-            $IdRuangan = $ruangan->IdRuangan;
-             
+        foreach($allruangan as $ruangan) {  
 
-            $jadwalRuangan = DB::select(DB::raw(
+             $IdGedung = $ruangan->IdGedung;
+             $IdRuangan = $ruangan->IdRuangan;
+
+        
+
+          $jadwalRuangan = DB::select(DB::raw(
                 "SELECT *                                         
                 FROM jadwal j, permohonan p
                 WHERE 
@@ -200,35 +205,80 @@ class PeminjamanController extends MasterController
             ));
 
 
+        if (count($jadwalRuangan) == 0) {
+            array_push($ruangantersedia, $ruangan);
 
-            if (count($jadwalRuangan) == 0) {
-                array_push($ruangantersedia, $ruangan);
-            } else {
+         } else {
 
-                foreach($jadwalRuangan as $jadwal){
+
+                     foreach($jadwalRuangan as $jadwal){
+                      
+                        $arr = array();
+                        $datatanggalmulai = $jadwal->WaktuMulai;
+                        $arr = explode(' ', $datatanggalmulai);
+
+                        $datawaktumulai = strtotime($jadwal->WaktuMulai);
+                        $datawaktuselesai = strtotime($jadwal->WaktuSelesai);
+
+                         // array_push($ruangantersedia, $jadwal);
+
+                        if($arr[0]==$tanggal){
+                             
+                            if( (($waktuMulai >= $datawaktuselesai || $waktuMulai < $datawaktumulai) && 
+                              ($waktuSelesai > $datawaktuselesai || $waktuSelesai < $datawaktumulai)) )
+                               array_push($ruangantersedia, $ruangan); 
+                        }
+        //             $datawaktumulai = strtotime($jadwal->WaktuMulai);
+        //             $datawaktuselesai = strtotime($jadwal->WaktuSelesai);
+        //             $waktusekarang = time();
                     
-                    $arr = array();
-                    $datatanggalmulai = $jadwal->WaktuMulai;
-                    $arr = explode(' ', $datatanggalmulai);
+        //             $tes = date('Y-m-d H:i:s', strtotime($jadwal->WaktuSelesai));
+        //             $tes1 = date('Y-m-d  H:i:s', $waktuMulainya);
+        //             $tes2= date('Y-m-d  H:i:s', $waktusekarang);
 
-                    $datawaktumulai = strtotime($jadwal->WaktuMulai);
-                    $datawaktuselesai = strtotime($jadwal->WaktuSelesai);
-
-                     // array_push($ruangantersedia, $jadwal);
-
-                    if($arr[0]==$tanggal){
-                         
-                        if( (($waktuMulai >= $datawaktuselesai || $waktuMulai < $datawaktumulai) && 
-                          ($waktuSelesai > $datawaktuselesai || $waktuSelesai < $datawaktumulai)) )
-                           array_push($ruangantersedia, $ruangan); 
-                    } 
-                } 
-
-            }   
-
+        //             //Kalau waktu mulai jadwal yang udah ada lebih lama dari waktu sekarang 
+        //             if( !($datawaktumulai < $waktusekarang && $datawaktuselesai < $waktusekarang) )
+        //             {
+                        
+        //                 if( (($waktuMulainya >= $datawaktuselesai || $waktuMulainya < $datawaktumulai) && 
+        //                      ($waktuSelesainya > $datawaktuselesai || $waktuSelesainya < $datawaktumulai)) )
+        //                        array_push($ruangantersedia, $ruangan);                
+        //             }  
+        //         }                        
+           }                    
         }
-        
+
+       
+    }
+
         return json_encode($ruangantersedia);
+    }
+    /**
+     * [setuju description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function setuju(Request $request)
+    {
+        // get session peminjaman yang mau dibatalkan
+        $input = $request->all();
+
+        // get all data
+        $id = $input['Id'];
+        $catatan = $input['catatan_txtarea'];
+        $user_id = $input['UserId'];
+        $persetujuan = $input['persetujuan'];
+
+        // incrementing Id
+        $tahap_catatan = Catatan::getIncrementedTahapCatatan();
+
+        // insert new record to database
+        Catatan::createCatatan($id, $tahap_catatan, $catatan, $user_id);
+
+        // update record's status
+        Permohonan::updateStatus($id, $persetujuan);
+        
+        return back();
     }
 
     /**
@@ -239,7 +289,7 @@ class PeminjamanController extends MasterController
     public function updateStatusPeminjaman(Request $request)
     {
         // check if user permitted        
-        if (!($this->isPermitted('updatepinjam'))) return redirect('pinjamruang');
+        // if (!($this->isPermitted('buatpinjam'))) return redirect('/');
         
         // validate request
         $this->validate($request, [
@@ -278,8 +328,8 @@ class PeminjamanController extends MasterController
             $permohonan[0]->IdPermohonan, 
             $tahapCatatan,
             $input['catatan_txtarea'],
-            $request->session()->get('user_sess')->NomorInduk,
-            md5($permohonan[0]->IdPermohonan.$tahapCatatan.$request->session()->get('user_sess')->NomorInduk)
+            session('user_sess')->NomorInduk,
+            md5($permohonan[0]->IdPermohonan.$tahapCatatan.session('user_sess')->NomorInduk)
         );
 
         // return to pinjamruang dashboard
@@ -294,11 +344,8 @@ class PeminjamanController extends MasterController
      */
     public function removePeminjaman(Request $request)
     {
-        // check if user permitted        
-        if (!($this->isPermitted('updatepinjam'))) return redirect('pinjamruang');
-
         // ganti value delete peminjaman pada database
-        Permohonan::removePermohonan($request->input('hashPermohonan'));
+        Permohonan::deletePermohonan($request->input('hashPermohonan'));
         
         // redirect back to peminjaman dashboard
         return redirect('pinjamruang');
