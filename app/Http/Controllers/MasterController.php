@@ -130,18 +130,41 @@ class MasterController extends Controller
                     'usulanpengadaan', 'buatpengadaan', 'updatepengadaan'
                 ],
 
-            'Kadept' => [],
+            'Kadept' => 
+                [
+                    'pinjamruang', 'buatpinjam', 'updatepinjam', 'jadwal',
+                    'registrasibarang', 'buatregistrasi', 'updateregistrasi' ,
+                    'maintenancebarang', 'buatmaintenance', 'updatemaintenance',
+                    'usulanpengadaan', 'buatpengadaan', 'updatepengadaan'
+                ],
 
-            'Kaprog' => [],
+            'Kaprog' => 
+                [
+                    'pinjamruang', 'buatpinjam', 'updatepinjam', 'jadwal',
+                    'registrasibarang', 'buatregistrasi', 'updateregistrasi' ,
+                    'maintenancebarang', 'buatmaintenance', 'updatemaintenance',
+                    'usulanpengadaan', 'buatpengadaan', 'updatepengadaan'
+                ],
 
-            'PAF' => [],
+            'PAF' => 
+                [
+                    'pinjamruang', 'buatpinjam', 'updatepinjam', 'jadwal',
+                    'registrasibarang', 'buatregistrasi', 'updateregistrasi' ,
+                    'maintenancebarang', 'buatmaintenance', 'updatemaintenance',
+                    'usulanpengadaan', 'buatpengadaan', 'updatepengadaan'
+                ],
 
-            'Dosen' => [],
+            'Dosen' => 
+                [
+                    'pinjamruang', 'buatpinjam', 'updatepinjam', 'jadwal',
+                    'registrasibarang', 'buatregistrasi', 'updateregistrasi' ,
+                    'maintenancebarang', 'buatmaintenance', 'updatemaintenance',
+                    'usulanpengadaan', 'buatpengadaan', 'updatepengadaan'
+                ],
 
     		'Mahasiswa' =>
                 [
-                    'pinjamruang', 'buatpinjam', 'updatepinjam', 
-                    'buatpeminjaman', 'updatepinjam'
+                    'pinjamruang', 'buatpinjam', 'updatepinjam',                    
                 ],
     	];
 

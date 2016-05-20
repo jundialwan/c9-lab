@@ -220,14 +220,14 @@ class PeminjamanController extends MasterController
                          
                         if( (($waktuMulai >= $datawaktuselesai || $waktuMulai < $datawaktumulai) && 
                           ($waktuSelesai > $datawaktuselesai || $waktuSelesai < $datawaktumulai)) )
-                           array_push($ruangantersedia, $ruangan); 
+                            array_push($ruangantersedia, $ruangan); 
                     } 
                 } 
 
             }   
 
         }
-        
+
         return json_encode($ruangantersedia);
     }
 
