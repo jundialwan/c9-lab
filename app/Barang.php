@@ -7,7 +7,7 @@ use DB;
 
 class Barang extends Model
 {
-	protected $table = 'BARANG';
+	protected $table = 'barang';
 
 	/**
      * Create barang data and input it to database

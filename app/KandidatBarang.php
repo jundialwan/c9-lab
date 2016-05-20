@@ -7,7 +7,7 @@ use DB;
 
 class KandidatBarang extends Model
 {
-    protected $table = 'KANDIDAT_BARANG';
+    protected $table = 'kandidat_barang';
 
     public static function createKandidatBarang($data)
     {

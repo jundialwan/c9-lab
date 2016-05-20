@@ -8,7 +8,7 @@ use DB;
 
 class Ruangan extends Model
 {
-    protected $table = 'RUANGAN';
+    protected $table = 'ruangan';
 
     /**
      * Create ruangan data and input it to database

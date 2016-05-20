@@ -7,7 +7,7 @@ use DB;
 
 class User extends Model
 {
-    protected $table = 'USERS';
+    protected $table = 'users';
 
     public static function isUserExist($user, $pass)
     {

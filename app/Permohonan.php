@@ -9,7 +9,7 @@ use App\Barang;
 
 class Permohonan extends Model
 {   
-    protected $table = 'PERMOHONAN';
+    protected $table = 'permohonan';
 
     /**
      * Create permohonan record on database

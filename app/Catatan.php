@@ -7,7 +7,7 @@ use DB;
 
 class Catatan extends Model
 {
-    protected $table = 'CATATAN';
+    protected $table = 'catatan';
 
     public static function getCatatanTerakhir() {
     	return DB::table('catatan')	->where('IdPermohonan', 1)->orderBy('TahapCatatan', 'desc')->first();

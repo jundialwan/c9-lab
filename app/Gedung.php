@@ -8,7 +8,7 @@ use DB;
 
 class Gedung extends Model
 {
-    protected $table = 'GEDUNG';
+    protected $table = 'gedung';
 
     /**
      * Create gedung data and input it to database

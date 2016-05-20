@@ -8,7 +8,7 @@ use DB;
 
 class Jadwal extends Model
 {
-    protected $table = 'JADWAL';
+    protected $table = 'jadwal';
 
     /**
      * Create jadwal record on database
