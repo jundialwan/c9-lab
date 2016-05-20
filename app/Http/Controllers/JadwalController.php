@@ -8,6 +8,7 @@ use App\Jadwal;
 use App\Ruangan;
 use App\Master;
 use App\Gedung;
+use App\Permohonan;
 use DB;
 use Input;
 
@@ -69,6 +70,7 @@ class JadwalController extends MasterController
             ]);
 
             $tanggal = $input['tanggal'];
+            // $tanggal = str_replace(',', '', $tanggal);
             $inputmulai = substr_replace($input['waktumulai'], ':', strlen($input['waktumulai'])-2, 0);
             $inputselesai = substr_replace($input['waktuselesai'], ':', strlen($input['waktuselesai'])-2, 0);
 
@@ -77,8 +79,9 @@ class JadwalController extends MasterController
             if (strlen($inputselesai) == 4) $inputselesai = '0'.$inputselesai;
 
             // get timestamp
-            $waktuMulai = date('Y\-m\-d  H:i:s', strtotime($tanggal.$inputmulai));
-            $waktuSelesai = date('Y\-m\-d  H:i:s', strtotime($tanggal.$inputselesai));
+            $waktuMulai = date('Y\-m\-d H:i:s', strtotime($tanggal.$inputmulai));
+            $waktuSelesai = date('Y\-m\-d H:i:s', strtotime($tanggal.$inputselesai));
+            dd($tanggal.' | '.$waktuSelesai);
             $ruangan = Ruangan::getRuangan($input['ruangandipilih']);
 
             $IdGedung = $ruangan[0]->IdGed;

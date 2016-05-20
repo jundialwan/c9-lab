@@ -23,7 +23,7 @@
 	    <script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
 	    <script type="text/javascript" src="{{ url('js/materialize.min.js') }}"></script>
 	    <script type="text/javascript" src="{{ url('js/javascript.js') }}"></script>
-	    <script type="text/javascript" src="{{ url('js/id.js') }}"></script>
+	    <!-- <script type="text/javascript" src="{{ url('js/id.js') }}"></script> -->
 		
 		@yield('fullcalendar')		   
 	</head>

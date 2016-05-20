@@ -14,10 +14,15 @@
 				 	<p>
 						Pilih Jenis Ruangan :
 			 		</p>
+
+			 		@if ($data['user_sess']->Role == 'Staf PPAA')
 					<p>
 						<input name="jenisRuangan" type="radio" id="Kelas" value="Kelas"/>
 					    <label for="Kelas">Ruang Kelas</label>				 	
 					</p>
+					@endif
+
+					@if ($data['user_sess']->Role == 'Staf Sekretariat')
 					<p>
 					    <input name="jenisRuangan" type="radio" id="Auditorium" value="Auditorium"/>
 					    <label for="Auditorium">Ruang Auditorium</label>
@@ -30,6 +35,7 @@
 					    <input name="jenisRuangan" type="radio" id="RuangRapatKecil" value="RuangRapatKecil"/>
 					    <label for="RuangRapatKecil">Ruang Rapat Kecil</label>
 					</p>
+					@endif
 				</div>
 			</div>
 
@@ -190,7 +196,7 @@ $(document).ready(function() {
 
 			       	myElementToAppendTo.html('');
 			       	$.each($.parseJSON(data), function(idx, obj) {	
-			           	myElementToAppendTo.append("<li class='collection-item'><div class='row form-row'><div class='col s4 pilihan'><input type='radio' name='ruangandipilih' id='radio"+i+"' value='"+obj.hashRuang+"'/><label for='radio"+i+"'>"+obj.Nama+"</label></div><div class='col s3'>"+obj.NomorRuangan+"</div><div class='col s3'>"+obj.KapasitasRuangan+"</div><div class='col s2'><a class='waves-light waves-effect uncheck' id='"+i+"'><i class='material-icons red-text'>cancel</i></a></div></div></div></li>");
+			           	myElementToAppendTo.append("<li class='collection-item'><div class='row form-row'><div class='col s4 pilihan'><input type='radio' name='ruangandipilih' id='radio"+i+"' value='"+obj.hashRuang+"'/><label for='radio"+i+"'>"+obj.NamaGedung+"</label></div><div class='col s3'>"+obj.NomorRuangan+"</div><div class='col s3'>"+obj.KapasitasRuangan+"</div><div class='col s2'><a class='waves-light waves-effect uncheck' id='"+i+"'><i class='material-icons red-text'>cancel</i></a></div></div></div></li>");
 			           	i++;
 					});
 				},

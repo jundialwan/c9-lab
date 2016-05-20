@@ -36,7 +36,7 @@
 			<div class="row">
 				<div class="col s6">
 					Pilih Tanggal Peminjaman :
-					<input required name="tanggal" type="date" class="pilihtanggalpinjam">
+					<input required name="tanggal" type="date" class="pilihtanggalpinjam" required>
 				</div>
 			</div>
 
@@ -184,19 +184,21 @@ $(document).ready(function() {
 
 		var kategori = $('input[type="radio"][name="jenisRuangan"]:checked').val();
 		var tanggal = $('.pilihtanggalpinjam').val();
-		//var waktumulai = new Number($('select[name=waktumulai] option:selected').val());
-		//var waktuselesai = new Number($('select[name=waktuselesai] option:selected').val());
 		var waktumulai = $('select[name=waktumulai] option:selected').val();
 		var waktuselesai = $('select[name=waktuselesai] option:selected').val();
-
 		
 		// form validation
-		//var isWaktuSelesaiLebihKecil = (((waktumulai)-(waktuselesai)) >= 0) ? true : false;
-		//var isKategoriUndefined = (kategori == undefined) ? true : false;
-		//var isTanggalEmpty = (tanggal == '') ? true : false;
+		var isWaktuSelesaiLebihKecil = (((waktumulai)-(waktuselesai)) >= 0) ? true : false;
+		var isKategoriUndefined = (kategori == undefined) ? true : false;
+		var isTanggalEmpty = (tanggal == '') ? true : false;
+
+		var kategori = $('input[type="radio"][name="jenisRuangan"]:checked').val();
+		var tanggal = $('.pilihtanggalpinjam').val();	
+		var waktumulai = $('select[name=waktumulai] option:selected').val();
+		var waktuselesai = $('select[name=waktuselesai] option:selected').val();
 						
 		// if form not validated don't execute the AJAX calling
-		//if (!isWaktuSelesaiLebihKecil && !isKategoriUndefined && !isTanggalEmpty) {
+		if (!isWaktuSelesaiLebihKecil && !isKategoriUndefined && !isTanggalEmpty) {
 			$.ajax({
 
 				url: 'getruangan?jenisRuangan='+kategori+'&tanggal='+tanggal+'&waktuMulai='+waktumulai+'&waktuSelesai='+waktuselesai,
@@ -217,7 +219,7 @@ $(document).ready(function() {
 					alert(status+' '+error);
 				}
 			})								
-		//}
+		}
 	});
 
 	$(document).on('change', 'input[type=radio][name=ruangandipilih]', function(){
